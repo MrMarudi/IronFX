@@ -1028,27 +1028,233 @@ What are you trading right now? Drop your setup below 👇
 
 </div><!-- /tab-posts -->
 
-<!-- ===== CALENDAR TAB ===== -->
+<!-- ===== CALENDAR TAB — WEEKLY VISUAL POSTS ===== -->
 <div id="tab-calendar" class="tab-pane">
-  <div class="section-title" style="margin-top:0;">📅 Content Calendar — Week of Feb 23 – Mar 2</div>
-  <div class="section-sub">7-day finance-first schedule · Based on real market events</div>
-  <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center;">
-    <div style="font-size:40px;margin-bottom:16px;">📅</div>
-    <div style="font-size:20px;font-weight:700;color:var(--white);margin-bottom:8px;">Full Content Calendar</div>
-    <div style="font-size:14px;color:var(--text2);margin-bottom:20px;">The complete weekly schedule is in the Overview tab → scroll down to "Content Calendar" section.</div>
-    <button class="copy-btn" onclick="switchTab('overview',document.querySelector('.tab-btn'))">← Back to Overview</button>
+  <div class="section-title" style="margin-top:8px;">📅 Week of Feb 23 – Mar 1, 2026</div>
+  <div class="section-sub">AI-generated visuals + ready-to-post captions · Real market data · 7 posts</div>
+
+  <style>
+    .wpost{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:28px;}
+    .wpost-head{padding:16px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+    .wpost-day{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;}
+    .wpost-title{font-size:18px;font-weight:800;color:var(--white);}
+    .wpost-body{display:grid;grid-template-columns:340px 1fr;}
+    .wpost-img{padding:20px;border-right:1px solid var(--border);}
+    .wpost-img-box{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;}
+    .wpost-img-box img{width:100%;height:100%;object-fit:cover;border-radius:10px;}
+    .wpost-img-placeholder{text-align:center;color:var(--text3);padding:20px;}
+    .wpost-content{padding:20px;}
+    .wpost-section{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;margin-top:16px;}
+    .wpost-section:first-child{margin-top:0;}
+    @media(max-width:900px){.wpost-body{grid-template-columns:1fr;}.wpost-img{border-right:none;border-bottom:1px solid var(--border);}}
+  </style>
+
+  <!-- MON -->
+  <div class="wpost">
+    <div class="wpost-head" style="background:linear-gradient(90deg,rgba(224,32,32,.12),transparent);">
+      <div><div class="wpost-day" style="color:var(--red2);">Monday · Feb 23</div><div class="wpost-title">📈 Week Ahead — Gold &amp; FOMC Watch</div></div>
+      <span style="background:rgba(245,166,35,.2);color:var(--gold);padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;">CAROUSEL · 4 slides</span>
+    </div>
+    <div class="wpost-body">
+      <div class="wpost-img">
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;">AI GENERATED VISUAL</div>
+        <div class="wpost-img-box">
+          <img src="img/2026-02-22-ironfx-mon-week-ahead.png" alt="Week Ahead Gold" onerror="this.parentElement.innerHTML='<div class=wpost-img-placeholder><div style=font-size:32px>🎨</div><div style=font-size:12px;margin-top:8px>Image loading...</div></div>'">
+        </div>
+      </div>
+      <div class="wpost-content">
+        <div class="wpost-section">SLIDE BREAKDOWN</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
+          <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:12px;color:var(--text);">📍 <strong>Slide 1:</strong> Gold $5,130 — +2.65% · Iran geopolitical risk driving the bid</div>
+          <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:12px;color:var(--text);">📍 <strong>Slide 2:</strong> Key levels: $5,050 support · $5,200 resistance · Watch weekly close</div>
+          <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:12px;color:var(--text);">📍 <strong>Slide 3:</strong> FOMC Minutes Wed · Core PCE Thu — USD volatility incoming</div>
+          <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:12px;color:var(--text);">📍 <strong>Slide 4:</strong> NFP Mar 6 — set levels NOW · Trade on IronFX</div>
+        </div>
+        <div class="wpost-section">CAPTION</div>
+        <div class="caption-box" id="c-mon">📈 WEEK AHEAD — FEB 23–28&#10;&#10;🥇 Gold: $5,130 (+2.65%) — Iran risk + USD weakness = continued bid&#10;💶 EUR/USD: 1.1789 — watching 1.18 resistance this week&#10;📊 S&P 500: 6,909 — VIX at 19, risk appetite intact&#10;&#10;🗓️ THIS WEEK'S MOVERS:&#10;→ Wed: FOMC Minutes ⚡&#10;→ Thu: Core PCE (USD vol alert)&#10;→ Fri: GDP Q4 Revised&#10;&#10;Where do you think Gold goes this week?&#10;Bull 🐂 or correction incoming 🐻?&#10;&#10;Trade it on IronFX — link in bio 👇&#10;&#10;#IronFX #WeekAhead #GoldTrading #XAUUSD #ForexWeek #MarketOutlook #FOMC #CorePCE #TradingNow #CFD</div>
+        <button class="copy-btn" onclick="copyCaption('c-mon',this)">📋 Copy Caption</button>
+      </div>
+    </div>
   </div>
+
+  <!-- TUE -->
+  <div class="wpost">
+    <div class="wpost-head" style="background:linear-gradient(90deg,rgba(245,166,35,.1),transparent);">
+      <div><div class="wpost-day" style="color:var(--gold);">Tuesday · Feb 24</div><div class="wpost-title">🥇 Gold Price Watch — Key Levels $5,130</div></div>
+      <span style="background:rgba(0,208,132,.2);color:var(--green);padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;">STATIC IMAGE</span>
+    </div>
+    <div class="wpost-body">
+      <div class="wpost-img">
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;">AI GENERATED VISUAL</div>
+        <div class="wpost-img-box">
+          <img src="img/2026-02-22-ironfx-tue-gold-levels.png" alt="Gold Key Levels" onerror="this.parentElement.innerHTML='<div class=wpost-img-placeholder><div style=font-size:32px>🥇</div><div style=font-size:12px;margin-top:8px>Image loading...</div></div>'">
+        </div>
+      </div>
+      <div class="wpost-content">
+        <div class="wpost-section">KEY LEVELS TABLE</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
+          <div style="display:flex;justify-content:space-between;padding:9px 12px;background:var(--bg);border:1px solid rgba(224,32,32,.3);border-radius:7px;"><span style="font-size:12px;color:var(--text2)">🔴 Resistance</span><span style="font-weight:700;color:var(--red2)">$5,200</span><span style="font-size:11px;color:var(--text3)">Breakout target</span></div>
+          <div style="display:flex;justify-content:space-between;padding:9px 12px;background:var(--bg);border:1px solid rgba(245,166,35,.5);border-radius:7px;"><span style="font-size:12px;color:var(--gold)">📍 Current</span><span style="font-weight:800;color:var(--gold)">$5,130</span><span style="font-size:11px;color:var(--text3)">Live price (+2.65%)</span></div>
+          <div style="display:flex;justify-content:space-between;padding:9px 12px;background:var(--bg);border:1px solid rgba(0,208,132,.3);border-radius:7px;"><span style="font-size:12px;color:var(--text2)">🟢 Support 1</span><span style="font-weight:700;color:var(--green)">$5,050</span><span style="font-size:11px;color:var(--text3)">Key floor</span></div>
+          <div style="display:flex;justify-content:space-between;padding:9px 12px;background:var(--bg);border:1px solid rgba(0,208,132,.2);border-radius:7px;"><span style="font-size:12px;color:var(--text2)">🟢 Support 2</span><span style="font-weight:700;color:var(--green)">$4,950</span><span style="font-size:11px;color:var(--text3)">Strong demand zone</span></div>
+        </div>
+        <div class="wpost-section">CAPTION</div>
+        <div class="caption-box" id="c-tue">🥇 GOLD PRICE WATCH — $5,130&#10;&#10;Gold is holding strong above $5,000 for the 3rd consecutive week. 📈&#10;&#10;Key levels every Gold trader needs:&#10;🔴 Resistance: $5,200 (breakout target)&#10;📍 Current: $5,130 (+2.65% this week)&#10;🟢 Support 1: $5,050 (watch this floor)&#10;🟢 Support 2: $4,950 (strong demand zone)&#10;&#10;What's driving the move:&#10;→ Iran geopolitical tension 🌍&#10;→ USD weakness post-FOMC caution&#10;→ Safe-haven demand building&#10;&#10;Are you long or waiting for the pullback?&#10;Comment your target below 👇&#10;&#10;Trade Gold on IronFX → Link in bio&#10;&#10;#IronFX #GoldTrading #XAUUSD #GoldPrice #ForexTrader #KeyLevels #PriceAction #TechnicalAnalysis #SafeHaven</div>
+        <button class="copy-btn" onclick="copyCaption('c-tue',this)">📋 Copy Caption</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WED -->
+  <div class="wpost">
+    <div class="wpost-head" style="background:linear-gradient(90deg,rgba(26,115,232,.12),transparent);">
+      <div><div class="wpost-day" style="color:var(--blue2);">Wednesday · Feb 25</div><div class="wpost-title">💱 EUR/USD Battle at 1.18</div></div>
+      <span style="background:rgba(245,166,35,.2);color:var(--gold);padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;">CAROUSEL · 4 slides</span>
+    </div>
+    <div class="wpost-body">
+      <div class="wpost-img">
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;">AI GENERATED VISUAL</div>
+        <div class="wpost-img-box">
+          <img src="img/2026-02-22-ironfx-wed-eurusd.png" alt="EURUSD" onerror="this.parentElement.innerHTML='<div class=wpost-img-placeholder><div style=font-size:32px>💱</div><div style=font-size:12px;margin-top:8px>Image loading...</div></div>'">
+        </div>
+      </div>
+      <div class="wpost-content">
+        <div class="wpost-section">BULL vs BEAR ANALYSIS</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
+          <div style="background:rgba(0,208,132,.05);border:1px solid rgba(0,208,132,.25);border-radius:8px;padding:9px 12px;font-size:12px;color:var(--text);">📈 <strong>BULL CASE:</strong> Break of 1.18 → 1.20 target · USD weakness continues · ECB hold</div>
+          <div style="background:rgba(224,32,32,.05);border:1px solid rgba(224,32,32,.25);border-radius:8px;padding:9px 12px;font-size:12px;color:var(--text);">📉 <strong>BEAR CASE:</strong> ING warns 1.16 on Iran escalation · FOMC tone hawkish today</div>
+          <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:12px;color:var(--text);">🎯 <strong>Trade setup:</strong> Set alerts at 1.1820 (bull trigger) &amp; 1.1750 (bear trigger)</div>
+        </div>
+        <div class="wpost-section">CAPTION</div>
+        <div class="caption-box" id="c-wed">💱 EUR/USD AT THE DECISION POINT&#10;&#10;1.1789 — bulls watching 1.18 like a hawk 👀&#10;&#10;📈 BULLISH: Break above 1.18 → path to 1.20 | USD weakness continues&#10;📉 BEARISH: ING warns 1.16 on Iran | FOMC Minutes today could surprise hawkish&#10;&#10;FOMC Minutes drop today — could move EUR/USD 50+ pips.&#10;Set alerts at 1.1820 and 1.1750. Don't get caught sleeping 🎯&#10;&#10;Your bias? LONG or SHORT? 👇&#10;&#10;#IronFX #EURUSD #ForexAnalysis #EURUSDforecast #CurrencyMarkets #TradingSetup #ForexSignals #FOMC #DollarTrading</div>
+        <button class="copy-btn" onclick="copyCaption('c-wed',this)">📋 Copy Caption</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- THU -->
+  <div class="wpost">
+    <div class="wpost-head" style="background:linear-gradient(90deg,rgba(0,208,132,.08),transparent);">
+      <div><div class="wpost-day" style="color:var(--green);">Thursday · Feb 26</div><div class="wpost-title">🏛️ FOMC Minutes Breakdown</div></div>
+      <span style="background:rgba(0,208,132,.2);color:var(--green);padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;">35s REEL</span>
+    </div>
+    <div class="wpost-body">
+      <div class="wpost-img">
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;">AI GENERATED VISUAL</div>
+        <div class="wpost-img-box">
+          <img src="img/2026-02-22-ironfx-thu-fomc.png" alt="FOMC Minutes" onerror="this.parentElement.innerHTML='<div class=wpost-img-placeholder><div style=font-size:32px>🏛️</div><div style=font-size:12px;margin-top:8px>Image loading...</div></div>'">
+        </div>
+      </div>
+      <div class="wpost-content">
+        <div class="wpost-section">REEL SCRIPT (35 seconds)</div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--text);line-height:1.9;margin-bottom:12px;">
+          <span style="color:var(--gold);font-weight:700;">[0–3s]</span> "FOMC just dropped — here's what it means for YOUR trades 🔥"<br>
+          <span style="color:var(--gold);font-weight:700;">[3–10s]</span> "Fed held at 4.5%. Tone = hawkish. No cuts before Q3 2026."<br>
+          <span style="color:var(--gold);font-weight:700;">[10–20s]</span> "EUR/USD reaction: holding 1.1789. Gold: $5,130 support intact."<br>
+          <span style="color:var(--gold);font-weight:700;">[20–30s]</span> "Core PCE tomorrow — the Fed's fave inflation gauge. Watch USD."<br>
+          <span style="color:var(--gold);font-weight:700;">[30–35s]</span> "Trade the reaction on IronFX. Link in bio 👇"
+        </div>
+        <div class="wpost-section">CAPTION</div>
+        <div class="caption-box" id="c-thu">🏛️ FOMC MINUTES — MARKETS JUST REACTED&#10;&#10;Fed held at 4.5%. Hawkish tone. No cuts before Q3 2026.&#10;&#10;Key takeaways:&#10;→ Inflation still a concern — watching Core PCE tomorrow&#10;→ Labor market "resilient" = Fed has room to wait&#10;→ No pivot signal — USD bid intact&#10;&#10;Market reaction:&#10;🥇 Gold: Holding $5,130 — geopolitical bid outweighs USD strength&#10;💶 EUR/USD: 1.1789 — watching 1.17 support if USD strengthens&#10;&#10;Tomorrow: Core PCE data 📅 | Consensus: +2.6% YoY&#10;A beat = USD rally. Save this 📌&#10;&#10;#IronFX #FOMC #FederalReserve #InterestRates #ForexNews #MarketMovers #GoldTrading #EURUSD #USD #TradingAlerts</div>
+        <button class="copy-btn" onclick="copyCaption('c-thu',this)">📋 Copy Caption</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRI -->
+  <div class="wpost">
+    <div class="wpost-head" style="background:linear-gradient(90deg,rgba(224,32,32,.12),transparent);">
+      <div><div class="wpost-day" style="color:var(--red2);">Friday · Feb 27</div><div class="wpost-title">⚡ Core PCE Friday — USD on Edge</div></div>
+      <span style="background:rgba(77,159,255,.2);color:var(--blue2);padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;">STATIC IMAGE</span>
+    </div>
+    <div class="wpost-body">
+      <div class="wpost-img">
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;">AI GENERATED VISUAL</div>
+        <div class="wpost-img-box">
+          <img src="img/2026-02-22-ironfx-fri-pce.png" alt="Core PCE Friday" onerror="this.parentElement.innerHTML='<div class=wpost-img-placeholder><div style=font-size:32px>⚡</div><div style=font-size:12px;margin-top:8px>Image loading...</div></div>'">
+        </div>
+      </div>
+      <div class="wpost-content">
+        <div class="wpost-section">TWO SCENARIOS</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">
+          <div style="background:rgba(0,208,132,.05);border:1px solid rgba(0,208,132,.25);border-radius:8px;padding:10px 12px;"><div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:4px;">🟢 MISS — PCE below 2.6%</div><div style="font-size:12px;color:var(--text);">USD weakens · Gold to $5,200 · EUR/USD pushes to 1.19 · Risk on</div></div>
+          <div style="background:rgba(224,32,32,.05);border:1px solid rgba(224,32,32,.25);border-radius:8px;padding:10px 12px;"><div style="font-size:11px;font-weight:700;color:var(--red2);margin-bottom:4px;">🔴 BEAT — PCE above 2.6%</div><div style="font-size:12px;color:var(--text);">USD rallies · Gold pulls to $5,050 · EUR/USD drops to 1.17 · Rate cut hopes fade</div></div>
+        </div>
+        <div class="wpost-section">CAPTION</div>
+        <div class="caption-box" id="c-fri">⚡ CORE PCE DROPS TODAY — USD ON EDGE&#10;&#10;Core PCE = The Fed's FAVORITE inflation gauge.&#10;Today's number could move markets 50+ pips 🎯&#10;&#10;Consensus: +2.6% YoY | Previous: +2.4%&#10;&#10;SCENARIO A — BEAT (+2.6%):&#10;🔴 USD rallies → EUR/USD drops to 1.17&#10;🔴 Gold pullback to $5,050 support&#10;🔴 Rate cut hopes fade for 2026&#10;&#10;SCENARIO B — MISS (-2.6%):&#10;🟢 USD weakens → Gold $5,200 in play&#10;🟢 EUR/USD pushes 1.19&#10;🟢 Risk assets rally&#10;&#10;Which way are you positioned?&#10;Drop your trade setup below 👇&#10;&#10;#IronFX #CorePCE #FedInflation #USD #ForexFriday #GoldTrading #MarketAlert #TradingDay #EconomicData</div>
+        <button class="copy-btn" onclick="copyCaption('c-fri',this)">📋 Copy Caption</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAT -->
+  <div class="wpost">
+    <div class="wpost-head" style="background:linear-gradient(90deg,rgba(155,89,182,.12),transparent);">
+      <div><div class="wpost-day" style="color:#c39bd3;">Saturday · Feb 28</div><div class="wpost-title">🗳️ Trader Poll — Gold Next Week?</div></div>
+      <span style="background:rgba(224,32,32,.2);color:var(--red2);padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;">INTERACTIVE</span>
+    </div>
+    <div class="wpost-body">
+      <div class="wpost-img">
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;">AI GENERATED VISUAL</div>
+        <div class="wpost-img-box">
+          <img src="img/2026-02-22-ironfx-sat-poll.png" alt="Trader Poll" onerror="this.parentElement.innerHTML='<div class=wpost-img-placeholder><div style=font-size:32px>🗳️</div><div style=font-size:12px;margin-top:8px>Image loading...</div></div>'">
+        </div>
+      </div>
+      <div class="wpost-content">
+        <div class="wpost-section">POLL OPTIONS</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">
+          <div style="background:rgba(0,208,132,.08);border:1px solid rgba(0,208,132,.3);border-radius:8px;padding:12px;font-size:13px;font-weight:700;color:var(--green);">🐂 BULL — $5,200+ by end of week</div>
+          <div style="background:rgba(224,32,32,.08);border:1px solid rgba(224,32,32,.3);border-radius:8px;padding:12px;font-size:13px;font-weight:700;color:var(--red2);">🐻 BEAR — Pullback to $5,000</div>
+          <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:13px;font-weight:700;color:var(--text2);">➡️ FLAT — Consolidation before NFP</div>
+        </div>
+        <div class="wpost-section">CAPTION</div>
+        <div class="caption-box" id="c-sat">🗳️ GOLD NEXT WEEK — WHAT'S YOUR CALL?&#10;&#10;Gold closed the week at $5,130 🥇&#10;+2.65% — Iran risk + USD weakness = relentless bid.&#10;&#10;But with Core PCE done and NFP next Friday...&#10;Can it hold? 3 options — vote below 👇&#10;&#10;🐂 BULL — $5,200 breakout next week&#10;🐻 BEAR — Pullback to $5,000&#10;➡️ FLAT — Tight range, wait for NFP&#10;&#10;Drop your target price in the comments 📊&#10;Top comment gets featured in our next post 💥&#10;&#10;#IronFX #TraderVote #GoldTrading #XAUUSD #GoldPrice #ForexPoll #TradersOfInstagram #MarketDebate #WeekendTrader</div>
+        <button class="copy-btn" onclick="copyCaption('c-sat',this)">📋 Copy Caption</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUN -->
+  <div class="wpost">
+    <div class="wpost-head" style="background:linear-gradient(90deg,rgba(245,166,35,.1),transparent);">
+      <div><div class="wpost-day" style="color:var(--gold);">Sunday · Mar 1</div><div class="wpost-title">📅 Event Radar — NFP Week</div></div>
+      <span style="background:rgba(245,166,35,.2);color:var(--gold);padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;">STATIC IMAGE</span>
+    </div>
+    <div class="wpost-body">
+      <div class="wpost-img">
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;">AI GENERATED VISUAL</div>
+        <div class="wpost-img-box">
+          <img src="img/2026-02-22-ironfx-sun-nfp-radar.png" alt="NFP Week Radar" onerror="this.parentElement.innerHTML='<div class=wpost-img-placeholder><div style=font-size:32px>📅</div><div style=font-size:12px;margin-top:8px>Image loading...</div></div>'">
+        </div>
+      </div>
+      <div class="wpost-content">
+        <div class="wpost-section">NEXT WEEK EVENTS</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--bg);border:1px solid rgba(245,166,35,.3);border-radius:7px;"><span style="font-size:12px;color:var(--text2)">🇦🇺 Tue Mar 4</span><span style="font-size:13px;color:var(--white);font-weight:600;">RBA Rate Decision</span><span style="background:rgba(224,32,32,.2);color:var(--red2);padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;">HIGH</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--bg);border:1px solid rgba(224,32,32,.3);border-radius:7px;"><span style="font-size:12px;color:var(--text2)">🇺🇸 Wed Mar 5</span><span style="font-size:13px;color:var(--white);font-weight:600;">ADP Employment</span><span style="background:rgba(224,32,32,.2);color:var(--red2);padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;">HIGH</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--bg);border:1px solid rgba(224,32,32,.5);border-radius:7px;box-shadow:0 0 8px rgba(224,32,32,.1);"><span style="font-size:12px;color:var(--text2)">🇺🇸 Fri Mar 7</span><span style="font-size:13px;color:var(--white);font-weight:800;">⚡ NON-FARM PAYROLLS</span><span style="background:var(--red);color:#fff;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:800;">🔥 KEY</span></div>
+        </div>
+        <div class="wpost-section">CAPTION</div>
+        <div class="caption-box" id="c-sun">📅 EVENT RADAR — WEEK OF MARCH 3–7&#10;&#10;⚡ THE BIG ONE: NON-FARM PAYROLLS FRIDAY&#10;50–100 pip moves expected on NFP release. Set your levels NOW.&#10;&#10;🗓️ FULL CALENDAR:&#10;→ Tue Mar 4: 🇦🇺 RBA Rate Decision — AUD/USD alert&#10;→ Wed Mar 5: 🇺🇸 ADP Employment — NFP preview&#10;→ Thu Mar 6: 🇺🇸 Jobless Claims&#10;→ Fri Mar 7: 🇺🇸 NFP + Unemployment Rate ⚡&#10;&#10;📊 Instruments to watch:&#10;EUR/USD · USD/JPY · Gold · AUD/USD · US30&#10;&#10;Save this post 📌 and trade prepared.&#10;Open your free demo → IronFX Link in bio 👇&#10;&#10;#IronFX #EventRadar #NFP #NonFarmPayrolls #EconomicCalendar #ForexCalendar #TradingAlerts #USD #ForexWeek</div>
+        <button class="copy-btn" onclick="copyCaption('c-sun',this)">📋 Copy Caption</button>
+      </div>
+    </div>
+  </div>
+
 </div><!-- /tab-calendar -->
 
 <!-- ===== COPY TAB ===== -->
 <div id="tab-copy" class="tab-pane">
-  <div class="section-title" style="margin-top:0;">✍️ Ready-to-Post Captions</div>
-  <div class="section-sub">All captions with real market data · Click to copy</div>
-  <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center;">
-    <div style="font-size:40px;margin-bottom:16px;">✍️</div>
-    <div style="font-size:20px;font-weight:700;color:var(--white);margin-bottom:8px;">Post Copy is in the Overview Tab</div>
-    <div style="font-size:14px;color:var(--text2);margin-bottom:20px;">All 7 ready-to-publish captions with copy buttons are in the Overview tab → scroll to "This Week's Post Copy".</div>
-    <button class="copy-btn" onclick="switchTab('overview',document.querySelector('.tab-btn'))">← Back to Overview</button>
+  <div class="section-title" style="margin-top:8px;">✍️ All 7 Captions — Ready to Post</div>
+  <div class="section-sub">Click any caption to copy · Real market data · Feb 23–Mar 1, 2026</div>
+  <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:40px;">
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 22px;"><div style="font-size:13px;font-weight:700;color:var(--red2);margin-bottom:6px;">📈 MON Feb 23 — Week Ahead Gold &amp; FOMC</div><div class="caption-box" id="cc-mon">📈 WEEK AHEAD — FEB 23–28&#10;🥇 Gold: $5,130 (+2.65%) — Iran risk + USD weakness = continued bid&#10;💶 EUR/USD: 1.1789 | 📊 S&P 500: 6,909&#10;→ Wed: FOMC Minutes ⚡ → Thu: Core PCE → Fri: GDP Q4&#10;Bull 🐂 or correction 🐻? Trade it on IronFX — link in bio 👇&#10;#IronFX #WeekAhead #GoldTrading #XAUUSD #ForexWeek #FOMC</div><button class="copy-btn" onclick="copyCaption('cc-mon',this)">📋 Copy</button></div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 22px;"><div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:6px;">🥇 TUE Feb 24 — Gold Key Levels $5,130</div><div class="caption-box" id="cc-tue">🥇 GOLD PRICE WATCH — $5,130&#10;Holding above $5,000 for 3 consecutive weeks 📈&#10;🔴 Resistance: $5,200 | 📍 Current: $5,130 (+2.65%) | 🟢 Support: $5,050&#10;Drivers: Iran tension 🌍 + USD weakness + safe-haven demand&#10;Long or waiting for pullback? Comment your target 👇&#10;#IronFX #GoldTrading #XAUUSD #GoldPrice #KeyLevels #PriceAction</div><button class="copy-btn" onclick="copyCaption('cc-tue',this)">📋 Copy</button></div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 22px;"><div style="font-size:13px;font-weight:700;color:var(--blue2);margin-bottom:6px;">💱 WED Feb 25 — EUR/USD Battle at 1.18</div><div class="caption-box" id="cc-wed">💱 EUR/USD AT THE DECISION POINT — 1.1789&#10;📈 BULL: Break 1.18 → 1.20 | USD weakness&#10;📉 BEAR: ING warns 1.16 on Iran | FOMC today hawkish risk&#10;Set alerts at 1.1820 &amp; 1.1750 🎯&#10;LONG or SHORT? 👇&#10;#IronFX #EURUSD #ForexAnalysis #FOMC #CurrencyMarkets #TradingSetup</div><button class="copy-btn" onclick="copyCaption('cc-wed',this)">📋 Copy</button></div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 22px;"><div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px;">🏛️ THU Feb 26 — FOMC Minutes Breakdown</div><div class="caption-box" id="cc-thu">🏛️ FOMC MINUTES — MARKETS REACTED&#10;Fed held at 4.5%. Hawkish. No cuts before Q3 2026.&#10;🥇 Gold: $5,130 holding | 💶 EUR/USD: 1.1789 watching 1.17&#10;Tomorrow: Core PCE 📅 — Beat = USD rally. Save 📌&#10;#IronFX #FOMC #FederalReserve #ForexNews #GoldTrading #TradingAlerts</div><button class="copy-btn" onclick="copyCaption('cc-thu',this)">📋 Copy</button></div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 22px;"><div style="font-size:13px;font-weight:700;color:var(--red2);margin-bottom:6px;">⚡ FRI Feb 27 — Core PCE Friday</div><div class="caption-box" id="cc-fri">⚡ CORE PCE TODAY — USD ON EDGE&#10;Consensus: +2.6% | Previous: +2.4%&#10;BEAT: 🔴 USD rallies → Gold to $5,050 → EUR/USD to 1.17&#10;MISS: 🟢 USD weakens → Gold to $5,200 → EUR/USD to 1.19&#10;Which way are you positioned? 👇&#10;#IronFX #CorePCE #USD #ForexFriday #GoldTrading #MarketAlert</div><button class="copy-btn" onclick="copyCaption('cc-fri',this)">📋 Copy</button></div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 22px;"><div style="font-size:13px;font-weight:700;color:#c39bd3;margin-bottom:6px;">🗳️ SAT Feb 28 — Trader Poll Gold</div><div class="caption-box" id="cc-sat">🗳️ GOLD NEXT WEEK — YOUR CALL?&#10;Closed at $5,130 · +2.65% · NFP next Friday...&#10;🐂 BULL — $5,200 breakout&#10;🐻 BEAR — Pullback to $5,000&#10;➡️ FLAT — Range before NFP&#10;Top comment gets featured in our next post 💥&#10;#IronFX #TraderVote #GoldTrading #XAUUSD #ForexPoll #WeekendTrader</div><button class="copy-btn" onclick="copyCaption('cc-sat',this)">📋 Copy</button></div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 22px;"><div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:6px;">📅 SUN Mar 1 — NFP Week Event Radar</div><div class="caption-box" id="cc-sun">📅 EVENT RADAR — WEEK OF MARCH 3–7&#10;⚡ NFP FRIDAY — 50–100 pip moves expected.&#10;→ Tue: 🇦🇺 RBA Rate Decision | → Wed: 🇺🇸 ADP Employment&#10;→ Fri: 🇺🇸 NON-FARM PAYROLLS ⚡&#10;Watch: EUR/USD · Gold · AUD/USD · US30&#10;Save this 📌 and trade prepared.&#10;#IronFX #NFP #NonFarmPayrolls #EconomicCalendar #ForexCalendar #TradingAlerts</div><button class="copy-btn" onclick="copyCaption('cc-sun',this)">📋 Copy</button></div>
   </div>
 </div><!-- /tab-copy -->
 
