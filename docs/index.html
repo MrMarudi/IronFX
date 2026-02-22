@@ -1,660 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>IronFX — Instagram Content Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg: #080c14;
-      --bg2: #0d1420;
-      --bg3: #111926;
-      --card: #131d2e;
-      --card2: #1a2540;
-      --border: #1e2d47;
-      --red: #e02020;
-      --red2: #ff3333;
-      --gold: #f5a623;
-      --gold2: #ffc94d;
-      --green: #00d084;
-      --green2: #00ff9d;
-      --blue: #1a73e8;
-      --blue2: #4d9fff;
-      --white: #ffffff;
-      --text: #c8d6e8;
-      --text2: #7a95b8;
-      --text3: #4a6080;
+      --bg:#080c14;--bg2:#0d1420;--bg3:#111926;--card:#131d2e;--card2:#1a2540;
+      --border:#1e2d47;--red:#e02020;--red2:#ff3333;--gold:#f5a623;--gold2:#ffc94d;
+      --green:#00d084;--green2:#00ff9d;--blue:#1a73e8;--blue2:#4d9fff;
+      --white:#ffffff;--text:#c8d6e8;--text2:#7a95b8;--text3:#4a6080;
     }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;min-height:100vh;}
+    header{background:linear-gradient(135deg,#0d1420,#0a1628);border-bottom:1px solid var(--border);padding:0 32px;position:sticky;top:0;z-index:100;}
+    .header-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
+    .logo-badge{background:var(--red);color:#fff;padding:6px 14px;border-radius:4px;font-weight:800;font-size:15px;letter-spacing:1px;}
+    .logo-sub{font-size:11px;color:var(--text2);letter-spacing:2px;text-transform:uppercase;}
+    .header-meta{display:flex;gap:24px;align-items:center;}
+    .live-badge{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--green);font-weight:600;}
+    .live-dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:pulse 1.5s infinite;}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);}}
+    .header-date{font-size:12px;color:var(--text3);}
+    main{max-width:1400px;margin:0 auto;padding:32px 24px 80px;}
+    .section-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--white);margin-bottom:4px;}
+    .section-sub{font-size:13px;color:var(--text2);margin-bottom:24px;}
+    .divider{height:1px;background:var(--border);margin:40px 0;}
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* TICKER */
+    .ticker-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:40px;}
+    .ticker-header{padding:12px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text2);}
+    .ticker-scroll{display:flex;overflow-x:auto;scrollbar-width:none;}
+    .ticker-scroll::-webkit-scrollbar{display:none;}
+    .ticker-item{padding:14px 24px;border-right:1px solid var(--border);min-width:140px;flex-shrink:0;}
+    .ticker-name{font-size:11px;color:var(--text2);font-weight:600;letter-spacing:1px;margin-bottom:4px;}
+    .ticker-price{font-size:18px;font-weight:700;color:var(--white);font-variant-numeric:tabular-nums;}
+    .ticker-change{font-size:12px;font-weight:600;margin-top:3px;}
+    .up{color:var(--green);} .down{color:var(--red2);} .flat{color:var(--text2);}
 
-    body {
-      background: var(--bg);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-    }
+    /* STATS */
+    .stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:40px;}
+    .stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 24px;position:relative;overflow:hidden;}
+    .stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+    .stat-card.red::before{background:linear-gradient(90deg,var(--red),transparent);}
+    .stat-card.gold::before{background:linear-gradient(90deg,var(--gold),transparent);}
+    .stat-card.green::before{background:linear-gradient(90deg,var(--green),transparent);}
+    .stat-card.blue::before{background:linear-gradient(90deg,var(--blue2),transparent);}
+    .stat-card.purple::before{background:linear-gradient(90deg,#9b59b6,transparent);}
+    .stat-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2);margin-bottom:8px;}
+    .stat-value{font-size:28px;font-weight:800;line-height:1;margin-bottom:6px;}
+    .stat-card.red .stat-value{color:var(--red2);}
+    .stat-card.gold .stat-value{color:var(--gold);}
+    .stat-card.green .stat-value{color:var(--green);}
+    .stat-card.blue .stat-value{color:var(--blue2);}
+    .stat-card.purple .stat-value{color:#c39bd3;}
+    .stat-note{font-size:12px;color:var(--text3);}
 
-    /* ── HEADER ── */
-    header {
-      background: linear-gradient(135deg, #0d1420 0%, #0a1628 100%);
-      border-bottom: 1px solid var(--border);
-      padding: 0 32px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(12px);
-    }
-    .header-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-    }
-    .logo-wrap {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .logo-badge {
-      background: var(--red);
-      color: #fff;
-      padding: 6px 14px;
-      border-radius: 4px;
-      font-weight: 800;
-      font-size: 15px;
-      letter-spacing: 1px;
-    }
-    .logo-sub {
-      font-size: 11px;
-      color: var(--text2);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-    .header-meta {
-      display: flex;
-      gap: 24px;
-      align-items: center;
-    }
-    .live-badge {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      color: var(--green);
-      font-weight: 600;
-    }
-    .live-dot {
-      width: 7px; height: 7px;
-      background: var(--green);
-      border-radius: 50%;
-      animation: pulse 1.5s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.3); }
-    }
-    .header-date {
-      font-size: 12px;
-      color: var(--text3);
-    }
+    /* INSIGHT BOX */
+    .insight-box{background:linear-gradient(135deg,rgba(0,208,132,.08),rgba(0,208,132,.03));border:1px solid rgba(0,208,132,.25);border-radius:12px;padding:20px 24px;margin-bottom:24px;display:flex;align-items:flex-start;gap:16px;}
+    .alert-box{background:linear-gradient(135deg,rgba(224,32,32,.12),rgba(224,32,32,.04));border:1px solid rgba(224,32,32,.3);border-radius:12px;padding:20px 24px;margin-bottom:24px;display:flex;align-items:flex-start;gap:16px;}
+    .box-icon{font-size:26px;flex-shrink:0;margin-top:2px;}
+    .box-title{font-size:15px;font-weight:700;margin-bottom:4px;}
+    .insight-box .box-title{color:var(--green);}
+    .alert-box .box-title{color:var(--red2);}
+    .box-text{font-size:13px;color:var(--text);line-height:1.6;}
+    .box-text strong{color:var(--white);}
 
-    /* ── MAIN ── */
-    main {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 32px 24px 80px;
-    }
+    /* TWO-COL */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:40px;}
 
-    /* ── SECTION HEADER ── */
-    .section-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 2px;
-      color: var(--white);
-      margin-bottom: 4px;
-    }
-    .section-sub {
-      font-size: 13px;
-      color: var(--text2);
-      margin-bottom: 24px;
-    }
-    .divider { height: 1px; background: var(--border); margin: 40px 0; }
+    /* POSTS TABLE */
+    .posts-table-wrap{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+    .posts-table{width:100%;border-collapse:collapse;font-size:13px;}
+    .posts-table th{text-align:left;padding:10px 16px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border);background:var(--bg2);}
+    .posts-table td{padding:12px 16px;border-bottom:1px solid rgba(30,45,71,.4);color:var(--text);vertical-align:middle;}
+    .posts-table tr:last-child td{border-bottom:none;}
+    .posts-table tr:hover td{background:var(--card2);}
+    .post-type-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;text-transform:uppercase;}
+    .type-video{background:rgba(0,208,132,.15);color:var(--green);}
+    .type-image{background:rgba(77,159,255,.15);color:var(--blue2);}
+    .views-big{font-weight:700;color:var(--gold);}
+    .likes-num{font-weight:600;color:var(--white);}
+    .post-caption{max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text2);}
+    .pinned-badge{background:rgba(245,166,35,.2);color:var(--gold);padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;margin-left:6px;}
 
-    /* ── MARKET TICKER ── */
-    .ticker-wrap {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 40px;
-    }
-    .ticker-header {
-      padding: 12px 20px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text2);
-    }
-    .ticker-scroll {
-      display: flex;
-      gap: 0;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .ticker-scroll::-webkit-scrollbar { display: none; }
-    .ticker-item {
-      padding: 14px 24px;
-      border-right: 1px solid var(--border);
-      min-width: 140px;
-      flex-shrink: 0;
-    }
-    .ticker-name {
-      font-size: 11px;
-      color: var(--text2);
-      font-weight: 600;
-      letter-spacing: 1px;
-      margin-bottom: 4px;
-    }
-    .ticker-price {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--white);
-      font-variant-numeric: tabular-nums;
-    }
-    .ticker-change {
-      font-size: 12px;
-      font-weight: 600;
-      margin-top: 3px;
-    }
-    .up { color: var(--green); }
-    .down { color: var(--red2); }
-    .flat { color: var(--text2); }
+    /* KEY FINDING */
+    .finding-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px;}
+    .finding-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
+    .finding-num{font-size:32px;font-weight:800;line-height:1;margin-bottom:6px;}
+    .finding-label{font-size:13px;font-weight:700;color:var(--white);margin-bottom:4px;}
+    .finding-sub{font-size:12px;color:var(--text2);line-height:1.5;}
+    .finding-card.gold .finding-num{color:var(--gold);}
+    .finding-card.green .finding-num{color:var(--green);}
+    .finding-card.red .finding-num{color:var(--red2);}
+    .finding-card.blue .finding-num{color:var(--blue2);}
+    .finding-card.purple .finding-num{color:#c39bd3;}
+    .finding-card.orange .finding-num{color:#ff8c42;}
 
-    /* ── STATS ROW ── */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 40px;
-    }
-    .stat-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px 24px;
-      position: relative;
-      overflow: hidden;
-    }
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-    }
-    .stat-card.red::before { background: linear-gradient(90deg, var(--red), transparent); }
-    .stat-card.gold::before { background: linear-gradient(90deg, var(--gold), transparent); }
-    .stat-card.green::before { background: linear-gradient(90deg, var(--green), transparent); }
-    .stat-card.blue::before { background: linear-gradient(90deg, var(--blue2), transparent); }
-    .stat-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--text2);
-      margin-bottom: 8px;
-    }
-    .stat-value {
-      font-size: 32px;
-      font-weight: 800;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .stat-card.red .stat-value { color: var(--red2); }
-    .stat-card.gold .stat-value { color: var(--gold); }
-    .stat-card.green .stat-value { color: var(--green); }
-    .stat-card.blue .stat-value { color: var(--blue2); }
-    .stat-note {
-      font-size: 12px;
-      color: var(--text3);
-    }
+    /* CALENDAR */
+    .calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;margin-bottom:40px;}
+    .cal-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:transform .2s,border-color .2s;cursor:pointer;}
+    .cal-card:hover{transform:translateY(-3px);border-color:var(--red);}
+    .cal-day{background:var(--card2);padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2);border-bottom:1px solid var(--border);}
+    .cal-body{padding:14px;}
+    .cal-emoji{font-size:22px;margin-bottom:8px;}
+    .cal-series{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red2);margin-bottom:6px;}
+    .cal-title{font-size:13px;font-weight:700;color:var(--white);line-height:1.4;margin-bottom:8px;}
+    .cal-tag{display:inline-block;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+    .tag-carousel{background:rgba(26,115,232,.2);color:var(--blue2);}
+    .tag-static{background:rgba(245,166,35,.2);color:var(--gold);}
+    .tag-reel{background:rgba(0,208,132,.2);color:var(--green);}
+    .tag-interactive{background:rgba(224,32,32,.2);color:var(--red2);}
 
-    /* ── ENGAGEMENT ALERT ── */
-    .alert-box {
-      background: linear-gradient(135deg, rgba(224,32,32,0.12), rgba(224,32,32,0.04));
-      border: 1px solid rgba(224,32,32,0.3);
-      border-radius: 12px;
-      padding: 20px 24px;
-      margin-bottom: 40px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .alert-icon {
-      font-size: 28px;
-      flex-shrink: 0;
-    }
-    .alert-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--red2);
-      margin-bottom: 4px;
-    }
-    .alert-text {
-      font-size: 13px;
-      color: var(--text);
-      line-height: 1.5;
-    }
-    .alert-text strong { color: var(--white); }
+    /* POST CARDS */
+    .posts-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-bottom:40px;}
+    .post-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+    .post-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+    .post-day-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text2);}
+    .post-title{font-size:16px;font-weight:800;color:var(--white);margin-top:2px;}
+    .post-format-badge{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+    .post-body{padding:20px;}
+    .post-section-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;margin-top:16px;}
+    .post-section-label:first-child{margin-top:0;}
+    .slides-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;}
+    .slide-chip{flex-shrink:0;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;min-width:140px;max-width:160px;}
+    .slide-num{font-size:10px;color:var(--text3);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+    .slide-text{font-size:11px;color:var(--text);line-height:1.4;}
+    .data-chips{display:flex;flex-wrap:wrap;gap:8px;}
+    .data-chip{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;display:flex;align-items:center;gap:8px;}
+    .chip-name{font-size:12px;font-weight:700;color:var(--white);}
+    .chip-price{font-size:12px;color:var(--text2);font-variant-numeric:tabular-nums;}
+    .chip-change{font-size:11px;font-weight:700;}
+    .caption-box{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px 16px;font-size:13px;color:var(--text);line-height:1.6;white-space:pre-wrap;font-family:'Inter',sans-serif;max-height:160px;overflow-y:auto;}
+    .copy-btn{background:var(--card2);border:1px solid var(--border);color:var(--text2);padding:7px 14px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;margin-top:8px;font-family:'Inter',sans-serif;}
+    .copy-btn:hover{background:var(--red);border-color:var(--red);color:#fff;}
+    .copy-btn.copied{background:var(--green);border-color:var(--green);color:#000;}
 
-    /* ── WEEKLY CALENDAR ── */
-    .calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 12px;
-      margin-bottom: 40px;
-    }
-    .cal-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: transform 0.2s, border-color 0.2s;
-      cursor: pointer;
-    }
-    .cal-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--red);
-    }
-    .cal-day {
-      background: var(--card2);
-      padding: 10px 14px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--text2);
-      border-bottom: 1px solid var(--border);
-    }
-    .cal-day.today { color: var(--red2); }
-    .cal-body { padding: 14px; }
-    .cal-emoji { font-size: 22px; margin-bottom: 8px; }
-    .cal-series {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--red2);
-      margin-bottom: 6px;
-    }
-    .cal-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.4;
-      margin-bottom: 8px;
-    }
-    .cal-tag {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-    .tag-carousel { background: rgba(26,115,232,0.2); color: var(--blue2); }
-    .tag-static { background: rgba(245,166,35,0.2); color: var(--gold); }
-    .tag-reel { background: rgba(0,208,132,0.2); color: var(--green); }
-    .tag-interactive { background: rgba(224,32,32,0.2); color: var(--red2); }
+    /* LEVELS TABLE */
+    .levels-table{width:100%;border-collapse:collapse;font-size:13px;}
+    .levels-table th{text-align:left;padding:8px 12px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border);}
+    .levels-table td{padding:10px 12px;border-bottom:1px solid rgba(30,45,71,.5);color:var(--text);vertical-align:middle;}
+    .levels-table tr:last-child td{border-bottom:none;}
+    .levels-table tr:hover td{background:var(--card2);}
+    .pair-name{font-weight:700;color:var(--white);}
+    .level-pill{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;}
+    .level-support{background:rgba(0,208,132,.15);color:var(--green);}
+    .level-resistance{background:rgba(224,32,32,.15);color:var(--red2);}
+    .trend-badge{padding:3px 8px;border-radius:4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+    .trend-bull{background:rgba(0,208,132,.15);color:var(--green);}
+    .trend-bear{background:rgba(224,32,32,.15);color:var(--red2);}
+    .trend-neutral{background:rgba(122,149,184,.15);color:var(--text2);}
 
-    /* ── POST CARDS ── */
-    .posts-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      margin-bottom: 40px;
-    }
-    .post-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-    }
-    .post-header {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .post-day-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text2);
-    }
-    .post-title {
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--white);
-      margin-top: 2px;
-    }
-    .post-format-badge {
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .post-body { padding: 20px; }
-    .post-section-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text3);
-      margin-bottom: 8px;
-      margin-top: 16px;
-    }
-    .post-section-label:first-child { margin-top: 0; }
+    /* COMPETITORS */
+    .comp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:40px;}
+    .comp-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:12px;}
+    .comp-avatar{width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;background:var(--card2);}
+    .comp-name{font-size:13px;font-weight:700;color:var(--white);}
+    .comp-handle{font-size:11px;color:var(--text2);}
+    .verified-badge{font-size:12px;margin-left:4px;}
 
-    /* Slide previews */
-    .slides-row {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border) transparent;
-    }
-    .slide-chip {
-      flex-shrink: 0;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 12px;
-      min-width: 140px;
-      max-width: 160px;
-    }
-    .slide-num {
-      font-size: 10px;
-      color: var(--text3);
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-    .slide-text {
-      font-size: 11px;
-      color: var(--text);
-      line-height: 1.4;
-    }
+    /* CHANNELS */
+    .channels-row{display:flex;gap:12px;margin-bottom:40px;flex-wrap:wrap;}
+    .channel-pill{background:var(--card);border:1px solid var(--border);border-radius:50px;padding:10px 20px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--text);}
+    .channel-pill .ch-icon{font-size:18px;}
+    .channel-pill a{color:var(--blue2);text-decoration:none;}
+    .channel-pill a:hover{color:var(--white);}
 
-    /* Market data chips */
-    .data-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .data-chip {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 8px 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .chip-name {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--white);
-    }
-    .chip-price {
-      font-size: 12px;
-      color: var(--text2);
-      font-variant-numeric: tabular-nums;
-    }
-    .chip-change {
-      font-size: 11px;
-      font-weight: 700;
-    }
+    /* NEWS */
+    .news-list{display:flex;flex-direction:column;gap:12px;margin-bottom:40px;}
+    .news-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;gap:14px;align-items:flex-start;transition:border-color .2s;}
+    .news-item:hover{border-color:var(--red);}
+    .news-source{background:var(--red);color:#fff;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:800;letter-spacing:1px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+    .news-headline{font-size:14px;font-weight:600;color:var(--white);line-height:1.4;margin-bottom:4px;}
+    .news-meta{font-size:11px;color:var(--text3);}
 
-    /* Caption box */
-    .caption-box {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 16px;
-      font-size: 13px;
-      color: var(--text);
-      line-height: 1.6;
-      white-space: pre-wrap;
-      font-family: 'Inter', sans-serif;
-      max-height: 160px;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border) transparent;
-    }
-    .copy-btn {
-      background: var(--card2);
-      border: 1px solid var(--border);
-      color: var(--text2);
-      padding: 7px 14px;
-      border-radius: 7px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.15s;
-      margin-top: 8px;
-      font-family: 'Inter', sans-serif;
-    }
-    .copy-btn:hover {
-      background: var(--red);
-      border-color: var(--red);
-      color: #fff;
-    }
-    .copy-btn.copied {
-      background: var(--green);
-      border-color: var(--green);
-      color: #000;
-    }
+    /* HASHTAGS */
+    .hashtag-set{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:16px;}
+    .hashtag-title{font-size:12px;font-weight:700;color:var(--text2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;}
+    .hashtag-wrap{display:flex;flex-wrap:wrap;gap:8px;}
+    .hashtag{background:rgba(26,115,232,.15);color:var(--blue2);border:1px solid rgba(26,115,232,.25);padding:4px 10px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;}
+    .hashtag:hover{background:var(--blue);color:#fff;}
 
-    /* ── KEY LEVELS TABLE ── */
-    .levels-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-    .levels-table th {
-      text-align: left;
-      padding: 8px 12px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text3);
-      border-bottom: 1px solid var(--border);
-    }
-    .levels-table td {
-      padding: 10px 12px;
-      border-bottom: 1px solid rgba(30,45,71,0.5);
-      color: var(--text);
-      vertical-align: middle;
-    }
-    .levels-table tr:last-child td { border-bottom: none; }
-    .levels-table tr:hover td { background: var(--card2); }
-    .pair-name { font-weight: 700; color: var(--white); }
-    .level-pill {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 700;
-      font-variant-numeric: tabular-nums;
-    }
-    .level-support { background: rgba(0,208,132,0.15); color: var(--green); }
-    .level-resistance { background: rgba(224,32,32,0.15); color: var(--red2); }
-    .trend-badge {
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .trend-bull { background: rgba(0,208,132,0.15); color: var(--green); }
-    .trend-bear { background: rgba(224,32,32,0.15); color: var(--red2); }
-    .trend-neutral { background: rgba(122,149,184,0.15); color: var(--text2); }
+    footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-size:12px;color:var(--text3);}
+    footer span{color:var(--red2);}
 
-    /* ── NEWS FEED ── */
-    .news-list { display: flex; flex-direction: column; gap: 12px; }
-    .news-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 16px;
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      transition: border-color 0.2s;
-    }
-    .news-item:hover { border-color: var(--red); }
-    .news-source {
-      background: var(--red);
-      color: #fff;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      white-space: nowrap;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .news-headline {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--white);
-      line-height: 1.4;
-      margin-bottom: 4px;
-    }
-    .news-meta {
-      font-size: 11px;
-      color: var(--text3);
-    }
-
-    /* ── WHAT'S BROKEN ── */
-    .issues-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-    .issue-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px;
-    }
-    .issue-icon { font-size: 24px; margin-bottom: 10px; }
-    .issue-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 6px;
-    }
-    .issue-text {
-      font-size: 12px;
-      color: var(--text2);
-      line-height: 1.5;
-    }
-    .issue-fix {
-      margin-top: 10px;
-      font-size: 11px;
-      color: var(--green);
-      font-weight: 600;
-    }
-
-    /* ── HASHTAGS ── */
-    .hashtag-set {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-bottom: 16px;
-    }
-    .hashtag-title {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text2);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .hashtag-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
-    .hashtag {
-      background: rgba(26,115,232,0.15);
-      color: var(--blue2);
-      border: 1px solid rgba(26,115,232,0.25);
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .hashtag:hover {
-      background: var(--blue);
-      color: #fff;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 24px;
-      text-align: center;
-      font-size: 12px;
-      color: var(--text3);
-    }
-    footer span { color: var(--red2); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1100px) {
-      .calendar-grid { grid-template-columns: repeat(4, 1fr); }
-      .stats-row { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 768px) {
-      .calendar-grid { grid-template-columns: repeat(2, 1fr); }
-      .posts-grid { grid-template-columns: 1fr; }
-      .issues-grid { grid-template-columns: 1fr; }
-      .stats-row { grid-template-columns: repeat(2, 1fr); }
-    }
+    @media(max-width:1100px){.calendar-grid{grid-template-columns:repeat(4,1fr);}.stats-row{grid-template-columns:repeat(3,1fr);}.finding-grid{grid-template-columns:repeat(2,1fr);}.comp-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:768px){.calendar-grid{grid-template-columns:repeat(2,1fr);}.posts-grid{grid-template-columns:1fr;}.stats-row{grid-template-columns:repeat(2,1fr);}.two-col{grid-template-columns:1fr;}.finding-grid{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
   <div class="header-inner">
-    <div class="logo-wrap">
-      <div>
-        <div class="logo-badge">IronFX</div>
-      </div>
-      <div>
-        <div style="font-weight:700;font-size:14px;">Instagram Content Dashboard</div>
-        <div class="logo-sub">Built by AI_Guro</div>
-      </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div><div class="logo-badge">IronFX</div></div>
+      <div><div style="font-weight:700;font-size:14px;">Instagram Content Dashboard</div><div class="logo-sub">Built by AI_Guro · Real Apify Data</div></div>
     </div>
     <div class="header-meta">
       <div class="live-badge"><div class="live-dot"></div> Live Market Data</div>
@@ -667,329 +208,312 @@
 
   <!-- MARKET TICKER -->
   <div class="ticker-wrap">
-    <div class="ticker-header">📊 Live Markets — Feb 22, 2026</div>
+    <div class="ticker-header">📊 Live Markets — Feb 22, 2026 · Google Finance</div>
     <div class="ticker-scroll">
-      <div class="ticker-item">
-        <div class="ticker-name">EUR/USD</div>
-        <div class="ticker-price">1.1789</div>
-        <div class="ticker-change up">🔼 +0.06%</div>
-      </div>
-      <div class="ticker-item">
-        <div class="ticker-name">GBP/USD</div>
-        <div class="ticker-price">1.3478</div>
-        <div class="ticker-change up">🔼 +0.01%</div>
-      </div>
-      <div class="ticker-item">
-        <div class="ticker-name">USD/JPY</div>
-        <div class="ticker-price">155.03</div>
-        <div class="ticker-change flat">➡ Flat</div>
-      </div>
-      <div class="ticker-item">
-        <div class="ticker-name">AUD/USD</div>
-        <div class="ticker-price">0.7063</div>
-        <div class="ticker-change down">🔽 -0.23%</div>
-      </div>
-      <div class="ticker-item">
-        <div class="ticker-name">GOLD</div>
-        <div class="ticker-price">$5,130</div>
-        <div class="ticker-change up">🔼 +2.65% 🔥</div>
-      </div>
-      <div class="ticker-item">
-        <div class="ticker-name">CRUDE OIL</div>
-        <div class="ticker-price">$66.31</div>
-        <div class="ticker-change down">🔽 -0.14%</div>
-      </div>
-      <div class="ticker-item">
-        <div class="ticker-name">S&P 500</div>
-        <div class="ticker-price">6,909</div>
-        <div class="ticker-change up">🔼 +0.69%</div>
-      </div>
-      <div class="ticker-item">
-        <div class="ticker-name">NASDAQ</div>
-        <div class="ticker-price">22,886</div>
-        <div class="ticker-change up">🔼 +0.90%</div>
-      </div>
-      <div class="ticker-item">
-        <div class="ticker-name">DOW JONES</div>
-        <div class="ticker-price">49,625</div>
-        <div class="ticker-change up">🔼 +0.47%</div>
-      </div>
-      <div class="ticker-item">
-        <div class="ticker-name">DAX</div>
-        <div class="ticker-price">25,260</div>
-        <div class="ticker-change up">🔼 +0.87%</div>
-      </div>
-      <div class="ticker-item">
-        <div class="ticker-name">BITCOIN</div>
-        <div class="ticker-price">$67,611</div>
-        <div class="ticker-change down">🔽 -0.57%</div>
-      </div>
-      <div class="ticker-item">
-        <div class="ticker-name">VIX</div>
-        <div class="ticker-price">19.09</div>
-        <div class="ticker-change down">🔽 -5.64%</div>
-      </div>
+      <div class="ticker-item"><div class="ticker-name">EUR/USD</div><div class="ticker-price">1.1789</div><div class="ticker-change up">🔼 +0.06%</div></div>
+      <div class="ticker-item"><div class="ticker-name">GBP/USD</div><div class="ticker-price">1.3478</div><div class="ticker-change up">🔼 +0.01%</div></div>
+      <div class="ticker-item"><div class="ticker-name">USD/JPY</div><div class="ticker-price">155.03</div><div class="ticker-change flat">➡ Flat</div></div>
+      <div class="ticker-item"><div class="ticker-name">AUD/USD</div><div class="ticker-price">0.7063</div><div class="ticker-change down">🔽 -0.23%</div></div>
+      <div class="ticker-item"><div class="ticker-name">GOLD 🔥</div><div class="ticker-price">$5,130</div><div class="ticker-change up">🔼 +2.65%</div></div>
+      <div class="ticker-item"><div class="ticker-name">CRUDE OIL</div><div class="ticker-price">$66.31</div><div class="ticker-change down">🔽 -0.14%</div></div>
+      <div class="ticker-item"><div class="ticker-name">S&P 500</div><div class="ticker-price">6,909</div><div class="ticker-change up">🔼 +0.69%</div></div>
+      <div class="ticker-item"><div class="ticker-name">NASDAQ</div><div class="ticker-price">22,886</div><div class="ticker-change up">🔼 +0.90%</div></div>
+      <div class="ticker-item"><div class="ticker-name">DOW JONES</div><div class="ticker-price">49,625</div><div class="ticker-change up">🔼 +0.47%</div></div>
+      <div class="ticker-item"><div class="ticker-name">DAX</div><div class="ticker-price">25,260</div><div class="ticker-change up">🔼 +0.87%</div></div>
+      <div class="ticker-item"><div class="ticker-name">VIX</div><div class="ticker-price">19.09</div><div class="ticker-change down">🔽 -5.64%</div></div>
+      <div class="ticker-item"><div class="ticker-name">BITCOIN</div><div class="ticker-price">$67,611</div><div class="ticker-change down">🔽 -0.57%</div></div>
     </div>
   </div>
 
   <!-- ACCOUNT STATS -->
-  <div class="section-title">📊 Account Audit</div>
-  <div class="section-sub">@ironfx — current performance</div>
+  <div class="section-title">📊 Real Account Data</div>
+  <div class="section-sub">@ironfx · Sourced via Apify · Feb 22, 2026</div>
 
   <div class="stats-row">
+    <div class="stat-card gold">
+      <div class="stat-label">Followers</div>
+      <div class="stat-value">31,542</div>
+      <div class="stat-note">Business account · Not verified</div>
+    </div>
+    <div class="stat-card blue">
+      <div class="stat-label">Total Posts</div>
+      <div class="stat-value">1,445</div>
+      <div class="stat-note">26 IGTV · 11 Highlights</div>
+    </div>
     <div class="stat-card red">
       <div class="stat-label">Engagement Rate</div>
       <div class="stat-value">0.06%</div>
-      <div class="stat-note">Industry avg: 1–3% · 20× below benchmark</div>
-    </div>
-    <div class="stat-card gold">
-      <div class="stat-label">Followers</div>
-      <div class="stat-value">31.5K</div>
-      <div class="stat-note">Total Posts: 1,445</div>
-    </div>
-    <div class="stat-card blue">
-      <div class="stat-label">Avg Likes / Post</div>
-      <div class="stat-value">17.5</div>
-      <div class="stat-note">Expected at 31K: ~315–945</div>
+      <div class="stat-note">Benchmark 1–3% · 20× below</div>
     </div>
     <div class="stat-card green">
-      <div class="stat-label">Best Post</div>
-      <div class="stat-value">36</div>
-      <div class="stat-note">Word game — 8 comments · Interactive wins</div>
+      <div class="stat-label">Avg Reel Views</div>
+      <div class="stat-value">36K</div>
+      <div class="stat-note">Hidden stat — content IS reaching people</div>
+    </div>
+    <div class="stat-card purple">
+      <div class="stat-label">Social Channels</div>
+      <div class="stat-value">5</div>
+      <div class="stat-note">IG · FB · TikTok · YouTube · LinkedIn</div>
     </div>
   </div>
 
-  <!-- ALERT -->
-  <div class="alert-box">
-    <div class="alert-icon">🚨</div>
+  <!-- BIG INSIGHT -->
+  <div class="insight-box">
+    <div class="box-icon">🚨</div>
     <div>
-      <div class="alert-title">Critical: Dead Account Syndrome</div>
-      <div class="alert-text">
-        1,445 posts. 31,542 followers. <strong>17.5 average likes.</strong>
-        Posts have no financial specificity, no community replies, 2 posts published with zero caption.
-        The fix: <strong>finance-first content with real data, daily publishing, and active comment engagement.</strong>
+      <div class="box-title">Critical Hidden Finding: Reels ARE Getting Views — But Converting Nothing</div>
+      <div class="box-text">
+        The real Apify data reveals something the basic API missed:
+        <strong>Trading Psychology Reel = 54,666 views. Economic Calendar Reel = 53,337 views. Daylight Savings Reel = 32,969 views.</strong>
+        The content is reaching massive audiences via Reels — but only <strong>17–23 likes</strong> from 50K+ viewers.
+        This means the <strong>hook, content quality, and CTA are failing</strong> — not the distribution.
+        Fix the first 3 seconds, add a strong CTA, and this account can explode.
       </div>
     </div>
   </div>
 
-  <!-- WHAT'S BROKEN -->
-  <div class="section-title">❌ What's Broken</div>
-  <div class="section-sub">6 critical issues identified from account audit</div>
-  <div class="issues-grid" style="margin-bottom:40px;">
-    <div class="issue-card">
-      <div class="issue-icon">📭</div>
-      <div class="issue-title">No Engagement Response</div>
-      <div class="issue-text">Best post got 8 comments. Zero replies from IronFX. No community building whatsoever.</div>
-      <div class="issue-fix">→ Respond to every comment within 2 hours</div>
+  <div class="alert-box">
+    <div class="box-icon">❌</div>
+    <div>
+      <div class="box-title">What's Killing the Conversion</div>
+      <div class="box-text">
+        54K views → 17 likes = <strong>0.03% like rate</strong>. That's catastrophic.
+        Reasons: <strong>No hook in first 2s · Generic content with no financial data · No CTA at end of reels · Captions empty on some posts · Only 3–4 hashtags · Zero comment replies from brand.</strong>
+        The audience is there. The engagement funnel is broken.
+      </div>
     </div>
-    <div class="issue-card">
-      <div class="issue-icon">🏷️</div>
-      <div class="issue-title">Weak Hashtag Strategy</div>
-      <div class="issue-text">Only 2–3 hashtags per post. Best practice is 8–10 mixing branded + niche finance tags.</div>
-      <div class="issue-fix">→ Use hashtag sets A–D below every post</div>
+  </div>
+
+  <!-- KEY FINDINGS -->
+  <div class="section-title">🔍 Key Findings from Real Data</div>
+  <div class="section-sub">Extracted from Apify scrape — actual post-level numbers</div>
+  <div class="finding-grid">
+    <div class="finding-card gold">
+      <div class="finding-num">54,666</div>
+      <div class="finding-label">Reel Views — Top Post</div>
+      <div class="finding-sub">"Trading Psychology" reel · Jan 30, 2026 · Only 17 likes from 54K views</div>
     </div>
-    <div class="issue-card">
-      <div class="issue-icon">📝</div>
-      <div class="issue-title">Empty Captions</div>
-      <div class="issue-text">2 of the last 12 posts published with NO caption. Zero context, zero SEO, zero CTA.</div>
-      <div class="issue-fix">→ Every post needs a written caption</div>
+    <div class="finding-card green">
+      <div class="finding-num">53,337</div>
+      <div class="finding-label">Views — Pinned Post</div>
+      <div class="finding-sub">Economic Calendar reel (pinned) · Feb 6, 2026 · 23 likes</div>
     </div>
-    <div class="issue-card">
-      <div class="issue-icon">🎠</div>
-      <div class="issue-title">Zero Carousels</div>
-      <div class="issue-text">Carousels are the highest-reach format on Instagram. IronFX posts none. Major miss.</div>
-      <div class="issue-fix">→ 2 carousels per week minimum</div>
+    <div class="finding-card orange">
+      <div class="finding-num">32,969</div>
+      <div class="finding-label">Views — Daylight Savings</div>
+      <div class="finding-sub">Jan 28, 2026 · "Did you know?" reel format · 18 likes</div>
     </div>
-    <div class="issue-card">
-      <div class="issue-icon">💬</div>
-      <div class="issue-title">No CTAs That Convert</div>
-      <div class="issue-text">"Visit our website" kills conversion. No questions in captions = no comment triggers.</div>
-      <div class="issue-fix">→ End every caption with a question</div>
+    <div class="finding-card blue">
+      <div class="finding-num">36</div>
+      <div class="finding-label">Best Engagement — Word Game</div>
+      <div class="finding-sub">"Guess the letters" interactive post · 8 comments · Feb 10, 2026</div>
     </div>
-    <div class="issue-card">
-      <div class="issue-icon">📊</div>
-      <div class="issue-title">Generic Content</div>
-      <div class="issue-text">No specific prices, no real levels, no named events. Nothing a trader can actually use.</div>
-      <div class="issue-fix">→ Every post needs a real price or level</div>
+    <div class="finding-card red">
+      <div class="finding-num">0.03%</div>
+      <div class="finding-label">Like-to-View Rate on Reels</div>
+      <div class="finding-sub">Industry avg: 1–3% · Hook and CTA are the problem</div>
     </div>
+    <div class="finding-card purple">
+      <div class="finding-num">4,945</div>
+      <div class="finding-label">Cocoa Valentine's Reel</div>
+      <div class="finding-sub">Topical + commodity angle · 22 likes · Seasonal content works for reach</div>
+    </div>
+  </div>
+
+  <!-- REAL POSTS TABLE -->
+  <div class="section-title">📋 Real Post Data — Last 12 Posts</div>
+  <div class="section-sub">Full breakdown with actual view counts, likes, comments, and captions</div>
+  <div class="posts-table-wrap" style="margin-bottom:40px;">
+    <table class="posts-table">
+      <thead>
+        <tr>
+          <th>Date</th><th>Type</th><th>Caption / Theme</th><th>Views</th><th>Likes</th><th>Comments</th><th>Like/View</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:var(--text2);font-size:12px;">Feb 06</td>
+          <td><span class="post-type-badge type-video">Reel</span></td>
+          <td><span class="post-caption">Economic Calendar Feb 📅</span><span class="pinned-badge">📌 PINNED</span></td>
+          <td class="views-big">53,337</td><td class="likes-num">23</td><td>0</td><td class="down">0.04%</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text2);font-size:12px;">Feb 20</td>
+          <td><span class="post-type-badge type-video">Reel</span></td>
+          <td><span class="post-caption">(No caption)</span></td>
+          <td class="views-big" style="color:var(--text2)">77</td><td class="likes-num">10</td><td>0</td><td class="down">13%</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text2);font-size:12px;">Feb 20</td>
+          <td><span class="post-type-badge type-image">Image</span></td>
+          <td><span class="post-caption">Losses are part of the game — Myth vs Truth</span></td>
+          <td style="color:var(--text3)">—</td><td class="likes-num">6</td><td>0</td><td style="color:var(--text3)">—</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text2);font-size:12px;">Feb 20</td>
+          <td><span class="post-type-badge type-video">Reel</span></td>
+          <td><span class="post-caption">(No caption)</span></td>
+          <td class="views-big" style="color:var(--text2)">143</td><td class="likes-num">19</td><td>1</td><td class="up">13%</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text2);font-size:12px;">Feb 16</td>
+          <td><span class="post-type-badge type-image">Image</span></td>
+          <td><span class="post-caption">Wide range of trading platforms 🖥️</span></td>
+          <td style="color:var(--text3)">—</td><td class="likes-num">6</td><td>0</td><td style="color:var(--text3)">—</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text2);font-size:12px;">Feb 13</td>
+          <td><span class="post-type-badge type-video">Reel</span></td>
+          <td><span class="post-caption">Valentine's Cocoa trade 🍫💖</span></td>
+          <td class="views-big">4,945</td><td class="likes-num">22</td><td>0</td><td class="down">0.44%</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text2);font-size:12px;">Feb 12</td>
+          <td><span class="post-type-badge type-image">Image</span></td>
+          <td><span class="post-caption">Valentine's Effect — educational term</span></td>
+          <td style="color:var(--text3)">—</td><td class="likes-num">14</td><td>0</td><td style="color:var(--text3)">—</td>
+        </tr>
+        <tr style="background:rgba(0,208,132,.04);">
+          <td style="color:var(--text2);font-size:12px;">Feb 10</td>
+          <td><span class="post-type-badge type-image">Image</span></td>
+          <td><span class="post-caption">🏆 Guess the missing letters word game</span></td>
+          <td style="color:var(--text3)">—</td><td class="likes-num" style="color:var(--green)">36</td><td style="color:var(--green);font-weight:700;">8</td><td style="color:var(--text3)">—</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text2);font-size:12px;">Feb 04</td>
+          <td><span class="post-type-badge type-image">Image</span></td>
+          <td><span class="post-caption">Requotes FAQ — You asked, we answer</span></td>
+          <td style="color:var(--text3)">—</td><td class="likes-num">19</td><td>0</td><td style="color:var(--text3)">—</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text2);font-size:12px;">Feb 02</td>
+          <td><span class="post-type-badge type-image">Image</span></td>
+          <td><span class="post-caption">Raw ECN Account — spreads from 0 pips</span></td>
+          <td style="color:var(--text3)">—</td><td class="likes-num">20</td><td>0</td><td style="color:var(--text3)">—</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text2);font-size:12px;">Jan 30</td>
+          <td><span class="post-type-badge type-video">Reel</span></td>
+          <td><span class="post-caption">Trading psychology — instincts vs emotions</span></td>
+          <td class="views-big">54,666</td><td class="likes-num">17</td><td>0</td><td class="down">0.03%</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text2);font-size:12px;">Jan 28</td>
+          <td><span class="post-type-badge type-video">Reel</span></td>
+          <td><span class="post-caption">Daylight savings + forex sessions</span></td>
+          <td class="views-big">32,969</td><td class="likes-num">18</td><td>0</td><td class="down">0.05%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- COMPETITORS -->
+  <div class="section-title">⚔️ Competitor Landscape</div>
+  <div class="section-sub">Related accounts suggested by Instagram — who IronFX is competing against</div>
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="comp-avatar" style="background:linear-gradient(135deg,#e52d27,#b31217);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff;">XM</div>
+      <div><div class="comp-name">XM Global <span class="verified-badge">✅</span></div><div class="comp-handle">@xmglobal · Verified giant</div></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-avatar" style="background:linear-gradient(135deg,#1a73e8,#0d47a1);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff;">FT</div>
+      <div><div class="comp-name">FXTM <span class="verified-badge">✅</span></div><div class="comp-handle">@fxtmglobal · Verified competitor</div></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-avatar" style="background:linear-gradient(135deg,#27ae60,#1a7a42);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;">ROBO</div>
+      <div><div class="comp-name">RoboForex</div><div class="comp-handle">@roboforex</div></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-avatar" style="background:linear-gradient(135deg,#f39c12,#d68910);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;">HFM</div>
+      <div><div class="comp-name">HFM India</div><div class="comp-handle">@hfm_india_official</div></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-avatar" style="background:linear-gradient(135deg,#8e44ad,#6c3483);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:#fff;">VAX</div>
+      <div><div class="comp-name">Vantage Plus</div><div class="comp-handle">@vantagemarkets.plus</div></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-avatar" style="background:linear-gradient(135deg,#f5a623,#e67e22);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:#fff;">GOLD</div>
+      <div><div class="comp-name">XAUUSD Trader <span class="verified-badge">✅</span></div><div class="comp-handle">@jaamforex</div></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-avatar" style="background:linear-gradient(135deg,#2c3e50,#1a252f);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:#fff;">XMP</div>
+      <div><div class="comp-name">XM Pakistan <span class="verified-badge">✅</span></div><div class="comp-handle">@xmpakistan</div></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-avatar" style="background:linear-gradient(135deg,#16a085,#0e6655);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:#fff;">FFF</div>
+      <div><div class="comp-name">ForexFundsFlow <span class="verified-badge">✅</span></div><div class="comp-handle">@forexfundsflow</div></div>
+    </div>
+  </div>
+
+  <!-- SOCIAL CHANNELS -->
+  <div class="section-title">🌐 IronFX Multi-Channel Presence</div>
+  <div class="section-sub">All confirmed external links from the Instagram profile</div>
+  <div class="channels-row">
+    <div class="channel-pill"><span class="ch-icon">📸</span><a href="https://www.instagram.com/ironfx/" target="_blank">Instagram @ironfx</a></div>
+    <div class="channel-pill"><span class="ch-icon">📘</span><a href="https://www.facebook.com/ironfx/" target="_blank">Facebook /ironfx</a></div>
+    <div class="channel-pill"><span class="ch-icon">🎵</span><a href="https://www.tiktok.com/@ironfxglobal" target="_blank">TikTok @ironfxglobal</a></div>
+    <div class="channel-pill"><span class="ch-icon">▶️</span><a href="https://www.youtube.com/user/IronFXMarketing" target="_blank">YouTube IronFXMarketing</a></div>
+    <div class="channel-pill"><span class="ch-icon">💼</span><a href="https://www.linkedin.com/company/ironfx/" target="_blank">LinkedIn /ironfx</a></div>
+    <div class="channel-pill"><span class="ch-icon">🌍</span><a href="http://www.ironfx.com/" target="_blank">ironfx.com</a></div>
   </div>
 
   <div class="divider"></div>
 
   <!-- WEEKLY CALENDAR -->
-  <div class="section-title">📅 Week of Feb 23 – Mar 1</div>
-  <div class="section-sub">7-day finance-first content plan — all posts ready to publish</div>
-
+  <div class="section-title">📅 Week of Feb 23 – Mar 1, 2026</div>
+  <div class="section-sub">Finance-first content plan — all posts ready to publish with live data</div>
   <div class="calendar-grid">
-    <div class="cal-card">
-      <div class="cal-day today">MON · FEB 23</div>
-      <div class="cal-body">
-        <div class="cal-emoji">📊</div>
-        <div class="cal-series">Week Ahead</div>
-        <div class="cal-title">Gold surging, FOMC Minutes, EUR/USD at risk</div>
-        <span class="cal-tag tag-carousel">Carousel</span>
-      </div>
-    </div>
-    <div class="cal-card">
-      <div class="cal-day">TUE · FEB 24</div>
-      <div class="cal-body">
-        <div class="cal-emoji">🔥</div>
-        <div class="cal-series">Instrument Spotlight</div>
-        <div class="cal-title">GOLD (XAU/USD) — $5,130 and climbing</div>
-        <span class="cal-tag tag-static">Static</span>
-      </div>
-    </div>
-    <div class="cal-card">
-      <div class="cal-day">WED · FEB 26</div>
-      <div class="cal-body">
-        <div class="cal-emoji">📈</div>
-        <div class="cal-series">Mid-Week Markets</div>
-        <div class="cal-title">FOMC Minutes dropped — what it means</div>
-        <span class="cal-tag tag-reel">Reel</span>
-      </div>
-    </div>
-    <div class="cal-card">
-      <div class="cal-day">THU · FEB 27</div>
-      <div class="cal-body">
-        <div class="cal-emoji">🧠</div>
-        <div class="cal-series">Analysis Drop</div>
-        <div class="cal-title">EUR/USD — Bull flag or USD comeback?</div>
-        <span class="cal-tag tag-carousel">Carousel</span>
-      </div>
-    </div>
-    <div class="cal-card">
-      <div class="cal-day">FRI · FEB 28</div>
-      <div class="cal-body">
-        <div class="cal-emoji">📉</div>
-        <div class="cal-series">Week Recap</div>
-        <div class="cal-title">Top movers, biggest surprise of the week</div>
-        <span class="cal-tag tag-static">Static</span>
-      </div>
-    </div>
-    <div class="cal-card">
-      <div class="cal-day">SAT · MAR 1</div>
-      <div class="cal-body">
-        <div class="cal-emoji">💬</div>
-        <div class="cal-series">Trader Vote</div>
-        <div class="cal-title">Gold — New ATH or pullback to $4,980?</div>
-        <span class="cal-tag tag-interactive">Interactive</span>
-      </div>
-    </div>
-    <div class="cal-card">
-      <div class="cal-day">SUN · MAR 2</div>
-      <div class="cal-body">
-        <div class="cal-emoji">📅</div>
-        <div class="cal-series">Event Radar</div>
-        <div class="cal-title">NFP Week — the month's biggest data drop</div>
-        <span class="cal-tag tag-static">Static</span>
-      </div>
-    </div>
+    <div class="cal-card"><div class="cal-day">MON · FEB 23</div><div class="cal-body"><div class="cal-emoji">📊</div><div class="cal-series">Week Ahead</div><div class="cal-title">Gold +2.65%, FOMC Minutes, EUR/USD at risk</div><span class="cal-tag tag-carousel">Carousel</span></div></div>
+    <div class="cal-card"><div class="cal-day">TUE · FEB 24</div><div class="cal-body"><div class="cal-emoji">🔥</div><div class="cal-series">Instrument Spotlight</div><div class="cal-title">GOLD — $5,130 and climbing</div><span class="cal-tag tag-static">Static</span></div></div>
+    <div class="cal-card"><div class="cal-day">WED · FEB 26</div><div class="cal-body"><div class="cal-emoji">📈</div><div class="cal-series">Mid-Week Markets</div><div class="cal-title">FOMC Minutes dropped — what it means</div><span class="cal-tag tag-reel">Reel</span></div></div>
+    <div class="cal-card"><div class="cal-day">THU · FEB 27</div><div class="cal-body"><div class="cal-emoji">🧠</div><div class="cal-series">Analysis Drop</div><div class="cal-title">EUR/USD — Bull flag or USD comeback?</div><span class="cal-tag tag-carousel">Carousel</span></div></div>
+    <div class="cal-card"><div class="cal-day">FRI · FEB 28</div><div class="cal-body"><div class="cal-emoji">📉</div><div class="cal-series">Week Recap</div><div class="cal-title">Top movers, biggest surprise of the week</div><span class="cal-tag tag-static">Static</span></div></div>
+    <div class="cal-card"><div class="cal-day">SAT · MAR 1</div><div class="cal-body"><div class="cal-emoji">💬</div><div class="cal-series">Trader Vote</div><div class="cal-title">Gold — New ATH or pullback to $4,980?</div><span class="cal-tag tag-interactive">Interactive</span></div></div>
+    <div class="cal-card"><div class="cal-day">SUN · MAR 2</div><div class="cal-body"><div class="cal-emoji">📅</div><div class="cal-series">Event Radar</div><div class="cal-title">NFP Week — mark your calendar</div><span class="cal-tag tag-static">Static</span></div></div>
   </div>
 
-  <!-- KEY LEVELS TABLE -->
+  <!-- KEY LEVELS -->
   <div class="section-title">📐 Key Levels This Week</div>
-  <div class="section-sub">Support, resistance, and trend direction — Feb 22, 2026</div>
+  <div class="section-sub">Support, resistance, trend — Feb 22, 2026 · Google Finance</div>
   <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:40px;">
     <table class="levels-table">
-      <thead>
-        <tr>
-          <th>Instrument</th>
-          <th>Price</th>
-          <th>Support</th>
-          <th>Resistance</th>
-          <th>Trend</th>
-          <th>Key Event</th>
-        </tr>
-      </thead>
+      <thead><tr><th>Instrument</th><th>Price</th><th>Support</th><th>Resistance</th><th>Trend</th><th>Key Event</th></tr></thead>
       <tbody>
-        <tr>
-          <td class="pair-name">🥇 Gold (XAU/USD)</td>
-          <td>$5,130 <span class="up">🔼 +2.65%</span></td>
-          <td><span class="level-pill level-support">$4,980</span> <span class="level-pill level-support">$4,850</span></td>
-          <td><span class="level-pill level-resistance">$5,200</span> <span class="level-pill level-resistance">$5,250</span></td>
-          <td><span class="trend-badge trend-bull">Bullish</span></td>
-          <td>FOMC Minutes Wed</td>
-        </tr>
-        <tr>
-          <td class="pair-name">💶 EUR/USD</td>
-          <td>1.1789 <span class="up">🔼 +0.06%</span></td>
-          <td><span class="level-pill level-support">1.1740</span> <span class="level-pill level-support">1.1600</span></td>
-          <td><span class="level-pill level-resistance">1.1850</span> <span class="level-pill level-resistance">1.1900</span></td>
-          <td><span class="trend-badge trend-neutral">Neutral</span></td>
-          <td>Core PCE Thu</td>
-        </tr>
-        <tr>
-          <td class="pair-name">🇯🇵 USD/JPY</td>
-          <td>155.025 <span class="flat">➡ Flat</span></td>
-          <td><span class="level-pill level-support">154.00</span> <span class="level-pill level-support">153.00</span></td>
-          <td><span class="level-pill level-resistance">155.50</span> <span class="level-pill level-resistance">156.00</span></td>
-          <td><span class="trend-badge trend-bear">Bearish JPY</span></td>
-          <td>BoJ Watch</td>
-        </tr>
-        <tr>
-          <td class="pair-name">🇬🇧 GBP/USD</td>
-          <td>1.3478 <span class="up">🔼 +0.01%</span></td>
-          <td><span class="level-pill level-support">1.3400</span> <span class="level-pill level-support">1.3300</span></td>
-          <td><span class="level-pill level-resistance">1.3550</span> <span class="level-pill level-resistance">1.3650</span></td>
-          <td><span class="trend-badge trend-bull">Bullish</span></td>
-          <td>UK CPI Watch</td>
-        </tr>
-        <tr>
-          <td class="pair-name">🛢️ Crude Oil (WTI)</td>
-          <td>$66.31 <span class="down">🔽 -0.14%</span></td>
-          <td><span class="level-pill level-support">$64.00</span> <span class="level-pill level-support">$62.50</span></td>
-          <td><span class="level-pill level-resistance">$68.00</span> <span class="level-pill level-resistance">$70.00</span></td>
-          <td><span class="trend-badge trend-bear">Bearish</span></td>
-          <td>EIA Inventories Wed</td>
-        </tr>
-        <tr>
-          <td class="pair-name">📊 S&P 500</td>
-          <td>6,909 <span class="up">🔼 +0.69%</span></td>
-          <td><span class="level-pill level-support">6,800</span> <span class="level-pill level-support">6,700</span></td>
-          <td><span class="level-pill level-resistance">7,000</span> <span class="level-pill level-resistance">7,100</span></td>
-          <td><span class="trend-badge trend-bull">Bullish</span></td>
-          <td>GDP Wed</td>
-        </tr>
+        <tr><td class="pair-name">🥇 Gold (XAU/USD)</td><td>$5,130 <span class="up">+2.65%</span></td><td><span class="level-pill level-support">$4,980</span> <span class="level-pill level-support">$4,850</span></td><td><span class="level-pill level-resistance">$5,200</span> <span class="level-pill level-resistance">$5,250</span></td><td><span class="trend-badge trend-bull">Bullish</span></td><td>FOMC Wed</td></tr>
+        <tr><td class="pair-name">💶 EUR/USD</td><td>1.1789 <span class="up">+0.06%</span></td><td><span class="level-pill level-support">1.1740</span> <span class="level-pill level-support">1.1600</span></td><td><span class="level-pill level-resistance">1.1850</span> <span class="level-pill level-resistance">1.1900</span></td><td><span class="trend-badge trend-neutral">Neutral</span></td><td>Core PCE Thu</td></tr>
+        <tr><td class="pair-name">🇯🇵 USD/JPY</td><td>155.025 <span class="flat">Flat</span></td><td><span class="level-pill level-support">154.00</span></td><td><span class="level-pill level-resistance">155.50</span> <span class="level-pill level-resistance">156.00</span></td><td><span class="trend-badge trend-bear">JPY Weak</span></td><td>BoJ Watch</td></tr>
+        <tr><td class="pair-name">🇬🇧 GBP/USD</td><td>1.3478 <span class="up">+0.01%</span></td><td><span class="level-pill level-support">1.3400</span></td><td><span class="level-pill level-resistance">1.3550</span></td><td><span class="trend-badge trend-bull">Bullish</span></td><td>UK CPI</td></tr>
+        <tr><td class="pair-name">🛢️ Crude Oil (WTI)</td><td>$66.31 <span class="down">-0.14%</span></td><td><span class="level-pill level-support">$64.00</span></td><td><span class="level-pill level-resistance">$68.00</span></td><td><span class="trend-badge trend-bear">Bearish</span></td><td>EIA Wed</td></tr>
+        <tr><td class="pair-name">📊 S&P 500</td><td>6,909 <span class="up">+0.69%</span></td><td><span class="level-pill level-support">6,800</span></td><td><span class="level-pill level-resistance">7,000</span></td><td><span class="trend-badge trend-bull">Bullish</span></td><td>GDP Wed</td></tr>
       </tbody>
     </table>
   </div>
 
   <!-- POST COPY -->
   <div class="section-title">✍️ Ready-to-Publish Post Copy</div>
-  <div class="section-sub">Full caption copy — click to copy, paste into Instagram</div>
-
+  <div class="section-sub">Full captions with live market data — click Copy and paste into Instagram</div>
   <div class="posts-grid">
 
-    <!-- POST 1 -->
     <div class="post-card">
       <div class="post-header">
-        <div>
-          <div class="post-day-label">Monday · Feb 23</div>
-          <div class="post-title">📊 Week Ahead Carousel</div>
-        </div>
+        <div><div class="post-day-label">Monday · Feb 23</div><div class="post-title">📊 Week Ahead Carousel</div></div>
         <span class="post-format-badge tag-carousel">5 Slides</span>
       </div>
       <div class="post-body">
         <div class="post-section-label">Slide Breakdown</div>
         <div class="slides-row">
-          <div class="slide-chip"><div class="slide-num">Slide 1</div><div class="slide-text">Cover — "Week Ahead Feb 23–27"</div></div>
+          <div class="slide-chip"><div class="slide-num">Slide 1</div><div class="slide-text">Cover — Week Ahead Feb 23–27</div></div>
           <div class="slide-chip"><div class="slide-num">Slide 2</div><div class="slide-text">Top 3: Gold, EUR/USD, USD/JPY</div></div>
           <div class="slide-chip"><div class="slide-num">Slide 3</div><div class="slide-text">Events: FOMC, Core PCE, GDP</div></div>
           <div class="slide-chip"><div class="slide-num">Slide 4</div><div class="slide-text">Analyst take + key levels</div></div>
           <div class="slide-chip"><div class="slide-num">Slide 5</div><div class="slide-text">CTA — Open free demo</div></div>
         </div>
-        <div class="post-section-label">Live Data Used</div>
-        <div class="data-chips">
-          <div class="data-chip"><span class="chip-name">Gold</span><span class="chip-price">$5,130</span><span class="chip-change up">+2.65%</span></div>
-          <div class="data-chip"><span class="chip-name">EUR/USD</span><span class="chip-price">1.1789</span><span class="chip-change up">+0.06%</span></div>
-          <div class="data-chip"><span class="chip-name">USD/JPY</span><span class="chip-price">155.03</span><span class="chip-change flat">Flat</span></div>
-        </div>
-        <div class="post-section-label">Caption (ready to paste)</div>
+        <div class="post-section-label">Caption</div>
         <div class="caption-box" id="cap1">📊 WEEK AHEAD: FEB 23–27
 
 Here's everything you need to trade this week 👇
 
-🔥 GOLD is surging +2.65% — geopolitical risk is driving the move
+🔥 GOLD is surging +2.65% — geopolitical risk driving the move
 💶 EUR/USD at 1.1789 — ING warns of a drop to 1.16
 🇯🇵 USD/JPY at 155.00 — Japan intervention risk building
 
@@ -1004,28 +528,20 @@ Trade all of these on IronFX — 500+ instruments, spreads from 0 pips.
 👉 Open a free demo: link in bio
 
 #IronFX #WeekAhead #ForexWeekly #MarketOutlook #EURUSD #GoldTrading #USDJPY #FOMC #TradingAnalysis #CurrencyMarkets</div>
-        <button class="copy-btn" onclick="copyCaption('cap1', this)">📋 Copy Caption</button>
+        <button class="copy-btn" onclick="copyCaption('cap1',this)">📋 Copy Caption</button>
       </div>
     </div>
 
-    <!-- POST 2 -->
     <div class="post-card">
       <div class="post-header">
-        <div>
-          <div class="post-day-label">Tuesday · Feb 24</div>
-          <div class="post-title">🔥 Gold Instrument Spotlight</div>
-        </div>
+        <div><div class="post-day-label">Tuesday · Feb 24</div><div class="post-title">🔥 Gold Spotlight</div></div>
         <span class="post-format-badge tag-static">Static</span>
       </div>
       <div class="post-body">
-        <div class="post-section-label">Visual Brief for Designer</div>
-        <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--text);line-height:1.7;">
-          Dark black bg · Gold/amber headline · IronFX logo top-center · Price stats in large white numbers · Support/Resistance pills (green/red) · "Trade Gold on IronFX" CTA bottom
-        </div>
         <div class="post-section-label">Live Data</div>
         <div class="data-chips">
           <div class="data-chip"><span class="chip-name">Gold</span><span class="chip-price">$5,130</span><span class="chip-change up">+2.65% 🔥</span></div>
-          <div class="data-chip"><span class="chip-name">Support</span><span class="chip-price level-support">$4,980</span></div>
+          <div class="data-chip"><span class="chip-name">Support</span><span class="chip-price" style="color:var(--green)">$4,980</span></div>
           <div class="data-chip"><span class="chip-name">Resistance</span><span class="chip-price" style="color:var(--red2)">$5,200</span></div>
         </div>
         <div class="post-section-label">Caption</div>
@@ -1033,14 +549,14 @@ Trade all of these on IronFX — 500+ instruments, spreads from 0 pips.
 
 Gold is UP +2.65% today — and here's why it matters 👇
 
-The combination of USD weakness and rising geopolitical tensions (Iran) is pushing Gold to test the $5,200 resistance zone. Institutional buyers active above $5,000 support.
+USD weakness + geopolitical tensions (Iran) pushing Gold to test the $5,200 resistance zone. Institutional buyers active above $5,000 support.
 
 📊 KEY LEVELS:
 🟢 Support: $4,980 — $4,850
 🔴 Resistance: $5,200 — $5,250 (ATH zone)
 ⚡ Watch: FOMC Minutes Wednesday — hawkish surprise = USD bid = Gold pressure
 
-Our take: Trend is firmly bullish, but Wednesday is the key risk event.
+Our take: Trend firmly bullish, but Wednesday is the key risk event.
 
 Bull or bear on Gold this week? Drop your target below 👇
 
@@ -1048,120 +564,68 @@ Trade Gold on IronFX — tight spreads, fast execution
 👉 Link in bio
 
 #IronFX #GoldTrading #XAUUSD #GoldPrice #PreciousMetals #ForexTrading #CommodityTrading #TechnicalAnalysis #MarketAnalysis #TradeSmart</div>
-        <button class="copy-btn" onclick="copyCaption('cap2', this)">📋 Copy Caption</button>
+        <button class="copy-btn" onclick="copyCaption('cap2',this)">📋 Copy Caption</button>
       </div>
     </div>
 
-    <!-- POST 3 -->
     <div class="post-card">
       <div class="post-header">
-        <div>
-          <div class="post-day-label">Wednesday · Feb 26</div>
-          <div class="post-title">📈 Mid-Week Markets Reel</div>
-        </div>
-        <span class="post-format-badge tag-reel">35s Reel</span>
-      </div>
-      <div class="post-body">
-        <div class="post-section-label">Reel Script (35 seconds)</div>
-        <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--text);line-height:1.8;">
-          <strong style="color:var(--gold)">[0–3s]</strong> Text: "MARKETS THIS WEEK — here's what you need to know 🔥"<br>
-          <strong style="color:var(--gold)">[3–10s]</strong> "Gold is up 2%+ this week — $5,130 as geopolitical risk builds. $5,200 is the level to watch."<br>
-          <strong style="color:var(--gold)">[10–18s]</strong> "EUR/USD holding 1.1789 — ING warns of 1.16 if Iran escalates. FOMC Minutes just dropped."<br>
-          <strong style="color:var(--gold)">[18–26s]</strong> "S&P 500 at 6,909. Nasdaq +0.9%. VIX dropped 5.6% — risk appetite is back."<br>
-          <strong style="color:var(--gold)">[26–35s]</strong> "Core PCE tomorrow. NFP next Friday. IronFX — 500+ instruments. Link in bio 👇"
-        </div>
-        <div class="post-section-label">Caption</div>
-        <div class="caption-box" id="cap3">📈 MID-WEEK MARKET UPDATE — FEB 26
-
-Markets are moving. Here's the snapshot 👇
-
-🥇 Gold: $5,130 🔼 +2.65% — geopolitical bid strong
-💶 EUR/USD: 1.1789 — FOMC Minutes just released
-📊 S&P 500: 6,909 🔼 — VIX dropped 5.6%, risk appetite returning
-🇯🇵 USD/JPY: 155.00 — BoJ/Fed divergence growing
-
-Still to come this week:
-→ Core PCE Thursday ⚠️ key inflation data
-→ ISM Manufacturing Friday
-
-Are you positioned for the rest of the week? What are you trading? 👇
-
-#IronFX #MidWeekMarkets #MarketUpdate #GoldTrading #EURUSD #SP500 #ForexNow #TradingLive #MarketMovers #CFDTrading</div>
-        <button class="copy-btn" onclick="copyCaption('cap3', this)">📋 Copy Caption</button>
-      </div>
-    </div>
-
-    <!-- POST 4 -->
-    <div class="post-card">
-      <div class="post-header">
-        <div>
-          <div class="post-day-label">Thursday · Feb 27</div>
-          <div class="post-title">🧠 EUR/USD Analysis Carousel</div>
-        </div>
+        <div><div class="post-day-label">Thursday · Feb 27</div><div class="post-title">🧠 EUR/USD Analysis</div></div>
         <span class="post-format-badge tag-carousel">6 Slides</span>
       </div>
       <div class="post-body">
         <div class="post-section-label">Slide Breakdown</div>
         <div class="slides-row">
-          <div class="slide-chip"><div class="slide-num">Slide 1</div><div class="slide-text">Cover — "Is the USD comeback for real?"</div></div>
-          <div class="slide-chip"><div class="slide-num">Slide 2</div><div class="slide-text">Price action — 1.1740–1.1830 range</div></div>
-          <div class="slide-chip"><div class="slide-num">Slide 3</div><div class="slide-text">Technical — bull flag, RSI 58</div></div>
-          <div class="slide-chip"><div class="slide-num">Slide 4</div><div class="slide-text">Fundamentals — Fed vs ECB</div></div>
-          <div class="slide-chip"><div class="slide-num">Slide 5</div><div class="slide-text">Scenarios — Bull 1.19 vs Bear 1.16</div></div>
+          <div class="slide-chip"><div class="slide-num">Slide 1</div><div class="slide-text">Cover — "USD comeback for real?"</div></div>
+          <div class="slide-chip"><div class="slide-num">Slide 2</div><div class="slide-text">Price: 1.1740–1.1830 range</div></div>
+          <div class="slide-chip"><div class="slide-num">Slide 3</div><div class="slide-text">Technical: bull flag, RSI 58</div></div>
+          <div class="slide-chip"><div class="slide-num">Slide 4</div><div class="slide-text">Fundamentals: Fed vs ECB</div></div>
+          <div class="slide-chip"><div class="slide-num">Slide 5</div><div class="slide-text">Scenarios: Bull 1.19 vs Bear 1.16</div></div>
           <div class="slide-chip"><div class="slide-num">Slide 6</div><div class="slide-text">CTA — Raw ECN 0 pip spreads</div></div>
         </div>
         <div class="post-section-label">Caption</div>
-        <div class="caption-box" id="cap4">🧠 EUR/USD ANALYSIS — FEB 27
+        <div class="caption-box" id="cap3">🧠 EUR/USD ANALYSIS — FEB 27
 
 Full breakdown for the week's most watched pair 👇 (swipe)
 
-EUR/USD is holding at 1.1789 — but is the USD comeback finally here?
+EUR/USD holding at 1.1789 — but is the USD comeback finally here?
 
-📈 BULL CASE: Weak PCE → USD sells off → 1.1850+ target
-📉 BEAR CASE: Hot PCE + hawkish FOMC → USD bid → ING's 1.16 target
+📈 BULL: Weak PCE → USD sells off → 1.1850+ target
+📉 BEAR: Hot PCE + hawkish FOMC → ING's 1.16 target
 
-Technical: Bull flag on 4H chart, RSI at 58 — room to run
-Fundamental: Everything hinges on today's Core PCE print
+Technical: Bull flag on 4H, RSI 58 — room to run
+Today's Core PCE is the key data point. Watch it closely.
 
-What's your call? BULL or BEAR on EUR/USD? 🐂🐻 Comment below 👇
+What's your call? BULL or BEAR? 🐂🐻 Comment below 👇
 
-Trade EUR/USD with spreads from 0 pips on IronFX 👉 Link in bio
+Trade EUR/USD spreads from 0 pips on IronFX 👉 Link in bio
 
 #IronFX #EURUSD #ForexAnalysis #TechnicalAnalysis #FXStrategy #CurrencyTrading #EURUSDAnalysis #ForexTrader #TradingSetup #MarketAnalysis</div>
-        <button class="copy-btn" onclick="copyCaption('cap4', this)">📋 Copy Caption</button>
+        <button class="copy-btn" onclick="copyCaption('cap3',this)">📋 Copy Caption</button>
       </div>
     </div>
 
-    <!-- POST 5 -->
     <div class="post-card">
       <div class="post-header">
-        <div>
-          <div class="post-day-label">Saturday · Mar 1</div>
-          <div class="post-title">💬 Trader Vote — Gold</div>
-        </div>
+        <div><div class="post-day-label">Saturday · Mar 1</div><div class="post-title">💬 Trader Vote — Gold</div></div>
         <span class="post-format-badge tag-interactive">Interactive</span>
       </div>
       <div class="post-body">
-        <div class="post-section-label">Visual Brief</div>
-        <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--text);line-height:1.7;">
-          Split layout: 🐂 BULL left (green) vs 🐻 BEAR right (red) · Gold price $5,130 center · "Comment BULL or BEAR" CTA at bottom
+        <div class="post-section-label">Engagement Strategy</div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;font-size:12px;color:var(--text);line-height:1.7;">
+          Interactive posts get <strong style="color:var(--green)">5–10× more comments</strong> than regular posts. Word game (Post #8) proved this with 8 comments vs 0 on everything else. Use this weekly.
         </div>
         <div class="post-section-label">Caption</div>
-        <div class="caption-box" id="cap5">🗳️ TRADER VOTE — GOLD EDITION
+        <div class="caption-box" id="cap4">🗳️ TRADER VOTE — GOLD EDITION
 
 Gold hit $5,130 this week — +2.65% on geopolitical tensions.
 
-Now the question: what's next?
+What's next?
 
-🐂 BULL CASE:
-Iran tensions stay elevated → safe-haven bid continues
-USD stays weak → Gold pushes past $5,200 to new ATH
+🐂 BULL: Iran tensions stay → safe-haven bid continues → new ATH above $5,200
+🐻 BEAR: Hot PCE + hawkish Fed → USD strengthens → pullback to $4,980
 
-🐻 BEAR CASE:
-Core PCE + FOMC hawkish → USD strengthens
-Profit-taking at resistance → pullback to $4,980
-
-What's your call? Drop BULL 🐂 or BEAR 🐻 below 👇
+Drop BULL 🐂 or BEAR 🐻 below 👇
 
 Best analysis gets featured Monday!
 
@@ -1169,51 +633,28 @@ Trade Gold on IronFX — tight spreads, 24/5 execution
 👉 Link in bio
 
 #IronFX #TraderVote #GoldTrading #XAUUSD #GoldPrice #ForexPoll #TradersOfInstagram #MarketDebate #TradingCommunity #WeekendTrader</div>
-        <button class="copy-btn" onclick="copyCaption('cap5', this)">📋 Copy Caption</button>
+        <button class="copy-btn" onclick="copyCaption('cap4',this)">📋 Copy Caption</button>
       </div>
     </div>
 
-    <!-- POST 6 -->
     <div class="post-card">
       <div class="post-header">
-        <div>
-          <div class="post-day-label">Sunday · Mar 2</div>
-          <div class="post-title">📅 Event Radar — NFP Week</div>
-        </div>
+        <div><div class="post-day-label">Sunday · Mar 2</div><div class="post-title">📅 Event Radar — NFP Week</div></div>
         <span class="post-format-badge tag-static">Static</span>
       </div>
       <div class="post-body">
-        <div class="post-section-label">Next Week's Key Events</div>
-        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bg);border:1px solid rgba(224,32,32,0.3);border-radius:8px;">
-            <span style="font-size:12px;font-weight:700;color:var(--text2)">🇦🇺 TUE</span>
-            <span style="font-size:13px;color:var(--white);font-weight:600;">RBA Rate Decision</span>
-            <span style="background:rgba(224,32,32,0.2);color:var(--red2);padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">HIGH</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bg);border:1px solid rgba(224,32,32,0.3);border-radius:8px;">
-            <span style="font-size:12px;font-weight:700;color:var(--text2)">🇺🇸 WED</span>
-            <span style="font-size:13px;color:var(--white);font-weight:600;">ADP Employment</span>
-            <span style="background:rgba(224,32,32,0.2);color:var(--red2);padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">HIGH</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bg);border:1px solid rgba(245,166,35,0.4);border-radius:8px;">
-            <span style="font-size:12px;font-weight:700;color:var(--text2)">🇺🇸 THU</span>
-            <span style="font-size:13px;color:var(--white);font-weight:600;">Jobless Claims</span>
-            <span style="background:rgba(245,166,35,0.2);color:var(--gold);padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;">MED</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bg);border:1px solid rgba(224,32,32,0.5);border-radius:8px;box-shadow:0 0 12px rgba(224,32,32,0.15);">
-            <span style="font-size:12px;font-weight:700;color:var(--text2)">🇺🇸 FRI</span>
-            <span style="font-size:13px;color:var(--white);font-weight:700;">⚡ NON-FARM PAYROLLS</span>
-            <span style="background:var(--red);color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:800;">🔥 KEY</span>
-          </div>
+        <div class="post-section-label">Next Week High-Impact Events</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bg);border:1px solid rgba(245,166,35,.3);border-radius:7px;"><span style="font-size:12px;color:var(--text2)">🇦🇺 TUE</span><span style="font-size:13px;color:var(--white);font-weight:600;">RBA Rate Decision</span><span style="background:rgba(224,32,32,.2);color:var(--red2);padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;">HIGH</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bg);border:1px solid rgba(224,32,32,.3);border-radius:7px;"><span style="font-size:12px;color:var(--text2)">🇺🇸 WED</span><span style="font-size:13px;color:var(--white);font-weight:600;">ADP Employment</span><span style="background:rgba(224,32,32,.2);color:var(--red2);padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;">HIGH</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bg);border:1px solid rgba(224,32,32,.5);border-radius:7px;box-shadow:0 0 10px rgba(224,32,32,.1);"><span style="font-size:12px;color:var(--text2)">🇺🇸 FRI</span><span style="font-size:13px;color:var(--white);font-weight:800;">⚡ NON-FARM PAYROLLS</span><span style="background:var(--red);color:#fff;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:800;">🔥 KEY</span></div>
         </div>
         <div class="post-section-label">Caption</div>
-        <div class="caption-box" id="cap6">📅 EVENT RADAR — WEEK OF MARCH 3–7
-
-The most important week for USD traders is coming 👇
+        <div class="caption-box" id="cap5">📅 EVENT RADAR — WEEK OF MARCH 3–7
 
 ⚡ THE BIG ONE: NON-FARM PAYROLLS FRIDAY
-The single most market-moving monthly data point.
-Expect 50–100 pip moves on USD pairs within minutes of release.
+The single most market-moving data point for USD pairs, Gold, and US Indices.
+Expect 50–100 pip moves within minutes of release.
 
 🔴 FULL CALENDAR:
 → Tue: 🇦🇺 RBA Rate Decision — AUD/USD alert
@@ -1221,7 +662,8 @@ Expect 50–100 pip moves on USD pairs within minutes of release.
 → Thu: 🇺🇸 Jobless Claims
 → Fri: 🇺🇸 NFP + Unemployment Rate ⚡
 
-📊 Instruments to watch: EUR/USD · USD/JPY · Gold · AUD/USD · US30 · SPX500
+📊 Instruments to watch:
+EUR/USD · USD/JPY · Gold · AUD/USD · US30
 
 Tip: Set your levels NOW. Don't trade blind on NFP.
 
@@ -1229,111 +671,83 @@ Save this post 📌 and trade prepared.
 Open your free demo on IronFX 👉 Link in bio
 
 #IronFX #EventRadar #NFP #NonFarmPayrolls #EconomicCalendar #ForexCalendar #TradingAlerts #USD #ForexWeek #TradeWithIronFX</div>
-        <button class="copy-btn" onclick="copyCaption('cap6', this)">📋 Copy Caption</button>
+        <button class="copy-btn" onclick="copyCaption('cap5',this)">📋 Copy Caption</button>
+      </div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-header">
+        <div><div class="post-day-label">Wednesday · Feb 26</div><div class="post-title">📈 Mid-Week Reel Script</div></div>
+        <span class="post-format-badge tag-reel">35s Reel</span>
+      </div>
+      <div class="post-body">
+        <div class="post-section-label">Script (35 seconds) — Reel Hook Strategy</div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--text);line-height:1.8;margin-bottom:8px;">
+          <strong style="color:var(--gold)">[0–3s HOOK]</strong> "Markets this week — here's what you NEED to know 🔥"<br>
+          <strong style="color:var(--gold)">[3–10s]</strong> "Gold is up 2%+ — $5,130. Geopolitical risk driving the bid. $5,200 is the line."<br>
+          <strong style="color:var(--gold)">[10–18s]</strong> "EUR/USD 1.1789 — FOMC Minutes just dropped. ING warning: could fall to 1.16."<br>
+          <strong style="color:var(--gold)">[18–26s]</strong> "S&P 500 at 6,909. VIX dropped 5.6% — risk appetite is back. Nasdaq +0.9%."<br>
+          <strong style="color:var(--gold)">[26–35s]</strong> "Core PCE tomorrow. NFP next Friday. Trade on IronFX — link in bio 👇"
+        </div>
+        <div class="post-section-label">Caption</div>
+        <div class="caption-box" id="cap6">📈 MID-WEEK MARKET UPDATE — FEB 26
+
+Markets are moving. Here's the snapshot 👇
+
+🥇 Gold: $5,130 🔼 +2.65% — geopolitical bid strong
+💶 EUR/USD: 1.1789 — FOMC Minutes just released
+📊 S&P 500: 6,909 🔼 — VIX dropped 5.6%, risk on
+🇯🇵 USD/JPY: 155.00 — BoJ/Fed divergence growing
+
+Still to come:
+→ Core PCE Thursday ⚠️
+→ ISM Manufacturing Friday
+
+What are you trading right now? Drop your setup below 👇
+
+#IronFX #MidWeekMarkets #MarketUpdate #GoldTrading #EURUSD #SP500 #ForexNow #TradingLive #MarketMovers #CFDTrading</div>
+        <button class="copy-btn" onclick="copyCaption('cap6',this)">📋 Copy Caption</button>
       </div>
     </div>
 
   </div>
 
-  <!-- NEWS FEED -->
-  <div class="section-title">📰 Live Market News</div>
-  <div class="section-sub">Key headlines driving this week's content — sourced live</div>
-  <div class="news-list" style="margin-bottom:40px;">
-    <div class="news-item">
-      <span class="news-source">ING</span>
-      <div>
-        <div class="news-headline">EUR/USD can fall to 1.16 on further Iran escalation</div>
-        <div class="news-meta">ING.com · 2 days ago · Used in: Monday & Thursday posts</div>
-      </div>
-    </div>
-    <div class="news-item">
-      <span class="news-source">BLOOMBERG</span>
-      <div>
-        <div class="news-headline">Speculation Mounts Japan to Buy Yen, Perhaps With US Help</div>
-        <div class="news-meta">Bloomberg.com · USD/JPY context · Used in: Monday Week Ahead post</div>
-      </div>
-    </div>
-    <div class="news-item">
-      <span class="news-source">FOREX.COM</span>
-      <div>
-        <div class="news-headline">US Dollar Price Action Setups: EUR/USD, USD/JPY, USD/CAD, Gold</div>
-        <div class="news-meta">FOREX.com · 1 day ago · Used in: Week Ahead analysis</div>
-      </div>
-    </div>
-    <div class="news-item">
-      <span class="news-source">FXSTREET</span>
-      <div>
-        <div class="news-headline">EUR/USD Weekly Forecast: US Dollar comeback in the making?</div>
-        <div class="news-meta">FXStreet · 2 days ago · Used in: Thursday Analysis carousel</div>
-      </div>
-    </div>
-    <div class="news-item">
-      <span class="news-source">DAILYFOREX</span>
-      <div>
-        <div class="news-headline">Weekly Pairs in Focus: Feb 23–27 — charts and key setups</div>
-        <div class="news-meta">DailyForex · 10 hours ago · Used in: GBP/USD coverage</div>
-      </div>
-    </div>
+  <!-- NEWS -->
+  <div class="section-title">📰 Live Market News Headlines</div>
+  <div class="section-sub">Used in this week's content — sourced live via SerpAPI · Google Finance</div>
+  <div class="news-list">
+    <div class="news-item"><span class="news-source">ING</span><div><div class="news-headline">EUR/USD can fall to 1.16 on further Iran escalation</div><div class="news-meta">ING.com · 2 days ago · Used in: Monday & Thursday posts</div></div></div>
+    <div class="news-item"><span class="news-source">BLOOMBERG</span><div><div class="news-headline">Speculation Mounts Japan to Buy Yen, Perhaps With US Help</div><div class="news-meta">Bloomberg · USD/JPY context · Used in: Monday Week Ahead</div></div></div>
+    <div class="news-item"><span class="news-source">FOREX.COM</span><div><div class="news-headline">US Dollar Price Action Setups: EUR/USD, USD/JPY, USD/CAD, Gold</div><div class="news-meta">FOREX.com · 1 day ago · Used in: Week Ahead analysis</div></div></div>
+    <div class="news-item"><span class="news-source">FXSTREET</span><div><div class="news-headline">EUR/USD Weekly Forecast: US Dollar comeback in the making?</div><div class="news-meta">FXStreet · 2 days ago · Used in: Thursday Analysis carousel</div></div></div>
   </div>
 
-  <!-- HASHTAG SETS -->
+  <!-- HASHTAGS -->
   <div class="section-title">#️⃣ Hashtag Sets</div>
-  <div class="section-sub">Use one full set per post — click any tag to copy</div>
-
-  <div class="hashtag-set">
-    <div class="hashtag-title">Set A — Market Updates</div>
-    <div class="hashtag-wrap">
-      <span class="hashtag">#IronFX</span><span class="hashtag">#ForexMarkets</span><span class="hashtag">#MarketUpdate</span><span class="hashtag">#TradingNow</span><span class="hashtag">#ForexAnalysis</span><span class="hashtag">#MarketOutlook</span><span class="hashtag">#CurrencyMarkets</span><span class="hashtag">#CFDTrading</span><span class="hashtag">#TradeSmart</span><span class="hashtag">#WeeklyForex</span>
-    </div>
-  </div>
-  <div class="hashtag-set">
-    <div class="hashtag-title">Set B — Instruments (Gold / Forex)</div>
-    <div class="hashtag-wrap">
-      <span class="hashtag">#IronFX</span><span class="hashtag">#EURUSD</span><span class="hashtag">#XAUUSD</span><span class="hashtag">#GoldTrading</span><span class="hashtag">#ForexSignals</span><span class="hashtag">#TechnicalAnalysis</span><span class="hashtag">#ForexStrategy</span><span class="hashtag">#TradingSetup</span><span class="hashtag">#PriceAction</span><span class="hashtag">#ForexTrader</span>
-    </div>
-  </div>
-  <div class="hashtag-set">
-    <div class="hashtag-title">Set C — Events & Calendar</div>
-    <div class="hashtag-wrap">
-      <span class="hashtag">#IronFX</span><span class="hashtag">#EconomicCalendar</span><span class="hashtag">#NFP</span><span class="hashtag">#FOMC</span><span class="hashtag">#ForexNews</span><span class="hashtag">#MarketMovers</span><span class="hashtag">#HighImpact</span><span class="hashtag">#TradingAlerts</span><span class="hashtag">#ForexFundamentals</span><span class="hashtag">#MacroTrading</span>
-    </div>
-  </div>
-  <div class="hashtag-set">
-    <div class="hashtag-title">Set D — Analysis</div>
-    <div class="hashtag-wrap">
-      <span class="hashtag">#IronFX</span><span class="hashtag">#MarketAnalysis</span><span class="hashtag">#TechnicalAnalysis</span><span class="hashtag">#FundamentalAnalysis</span><span class="hashtag">#TradingView</span><span class="hashtag">#ChartAnalysis</span><span class="hashtag">#ForexCharts</span><span class="hashtag">#TradingStrategy</span><span class="hashtag">#SmartMoney</span><span class="hashtag">#InstitutionalTrading</span>
-    </div>
-  </div>
+  <div class="section-sub">Click any tag to copy it instantly</div>
+  <div class="hashtag-set"><div class="hashtag-title">Set A — Market Updates</div><div class="hashtag-wrap"><span class="hashtag">#IronFX</span><span class="hashtag">#ForexMarkets</span><span class="hashtag">#MarketUpdate</span><span class="hashtag">#TradingNow</span><span class="hashtag">#ForexAnalysis</span><span class="hashtag">#MarketOutlook</span><span class="hashtag">#CurrencyMarkets</span><span class="hashtag">#CFDTrading</span><span class="hashtag">#TradeSmart</span><span class="hashtag">#WeeklyForex</span></div></div>
+  <div class="hashtag-set"><div class="hashtag-title">Set B — Gold / Instruments</div><div class="hashtag-wrap"><span class="hashtag">#IronFX</span><span class="hashtag">#EURUSD</span><span class="hashtag">#XAUUSD</span><span class="hashtag">#GoldTrading</span><span class="hashtag">#ForexSignals</span><span class="hashtag">#TechnicalAnalysis</span><span class="hashtag">#ForexStrategy</span><span class="hashtag">#TradingSetup</span><span class="hashtag">#PriceAction</span><span class="hashtag">#ForexTrader</span></div></div>
+  <div class="hashtag-set"><div class="hashtag-title">Set C — Events & Calendar</div><div class="hashtag-wrap"><span class="hashtag">#IronFX</span><span class="hashtag">#EconomicCalendar</span><span class="hashtag">#NFP</span><span class="hashtag">#FOMC</span><span class="hashtag">#ForexNews</span><span class="hashtag">#MarketMovers</span><span class="hashtag">#HighImpact</span><span class="hashtag">#TradingAlerts</span><span class="hashtag">#ForexFundamentals</span><span class="hashtag">#MacroTrading</span></div></div>
 
 </main>
 
-<footer>
-  Built by <span>AI_Guro</span> · IronFX Instagram Content Dashboard · Data: Google Finance via SerpAPI · Feb 22, 2026
-</footer>
+<footer>Built by <span>AI_Guro</span> · Real data: Apify Instagram Scraper + Google Finance (SerpAPI) · Feb 22, 2026</footer>
 
 <script>
-  function copyCaption(id, btn) {
-    const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text).then(() => {
-      btn.textContent = '✅ Copied!';
-      btn.classList.add('copied');
-      setTimeout(() => {
-        btn.textContent = '📋 Copy Caption';
-        btn.classList.remove('copied');
-      }, 2000);
+  function copyCaption(id,btn){
+    const text=document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text).then(()=>{
+      btn.textContent='✅ Copied!';btn.classList.add('copied');
+      setTimeout(()=>{btn.textContent='📋 Copy Caption';btn.classList.remove('copied');},2000);
     });
   }
-
-  // Make hashtags copyable
-  document.querySelectorAll('.hashtag').forEach(tag => {
-    tag.addEventListener('click', () => {
+  document.querySelectorAll('.hashtag').forEach(tag=>{
+    tag.addEventListener('click',()=>{
       navigator.clipboard.writeText(tag.textContent);
-      const orig = tag.textContent;
-      tag.textContent = '✅';
-      setTimeout(() => tag.textContent = orig, 1000);
+      const orig=tag.textContent;tag.textContent='✅';
+      setTimeout(()=>tag.textContent=orig,1000);
     });
   });
 </script>
-
 </body>
 </html>
