@@ -185,8 +185,86 @@
     footer{border-top:1px solid var(--border);padding:24px;text-align:center;font-size:12px;color:var(--text3);}
     footer span{color:var(--red2);}
 
-    @media(max-width:1100px){.calendar-grid{grid-template-columns:repeat(4,1fr);}.stats-row{grid-template-columns:repeat(3,1fr);}.finding-grid{grid-template-columns:repeat(2,1fr);}.comp-grid{grid-template-columns:repeat(2,1fr);}}
-    @media(max-width:768px){.calendar-grid{grid-template-columns:repeat(2,1fr);}.posts-grid{grid-template-columns:1fr;}.stats-row{grid-template-columns:repeat(2,1fr);}.two-col{grid-template-columns:1fr;}.finding-grid{grid-template-columns:1fr;}}
+    /* TABS */
+    .tab-nav{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 32px;position:sticky;top:64px;z-index:99;}
+    .tab-nav-inner{max-width:1400px;margin:0 auto;display:flex;gap:0;}
+    .tab-btn{padding:14px 24px;font-size:13px;font-weight:700;color:var(--text2);border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;font-family:'Inter',sans-serif;letter-spacing:.5px;}
+    .tab-btn:hover{color:var(--white);}
+    .tab-btn.active{color:var(--white);border-bottom-color:var(--red);}
+    .tab-pane{display:none;}
+    .tab-pane.active{display:block;}
+
+    /* POSTS ANALYSIS TAB */
+    .pa-section{margin-bottom:40px;}
+    .pa-top-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;}
+    .pa-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;position:relative;overflow:hidden;}
+    .pa-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+    .pa-card.gold::before{background:linear-gradient(90deg,var(--gold),transparent);}
+    .pa-card.green::before{background:linear-gradient(90deg,var(--green),transparent);}
+    .pa-card.red::before{background:linear-gradient(90deg,var(--red2),transparent);}
+    .pa-card.blue::before{background:linear-gradient(90deg,var(--blue2),transparent);}
+    .pa-num{font-size:30px;font-weight:800;line-height:1;margin-bottom:4px;}
+    .pa-card.gold .pa-num{color:var(--gold);}
+    .pa-card.green .pa-num{color:var(--green);}
+    .pa-card.red .pa-num{color:var(--red2);}
+    .pa-card.blue .pa-num{color:var(--blue2);}
+    .pa-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2);margin-bottom:4px;}
+    .pa-sub{font-size:12px;color:var(--text3);}
+
+    /* BAR CHART */
+    .bar-chart{display:flex;flex-direction:column;gap:8px;}
+    .bar-row{display:flex;align-items:center;gap:12px;}
+    .bar-label{font-size:12px;color:var(--text2);width:160px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .bar-track{flex:1;background:rgba(255,255,255,.06);border-radius:4px;height:20px;overflow:hidden;position:relative;}
+    .bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:11px;font-weight:700;color:#fff;transition:width .6s;}
+    .bar-fill.gold{background:linear-gradient(90deg,var(--gold),#ff8c42);}
+    .bar-fill.green{background:linear-gradient(90deg,var(--green),#00ff9d66);}
+    .bar-fill.blue{background:linear-gradient(90deg,var(--blue),var(--blue2));}
+    .bar-val{font-size:12px;font-weight:700;color:var(--white);width:70px;text-align:right;flex-shrink:0;}
+
+    /* FULL POSTS TABLE */
+    .fpt-wrap{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+    .fpt-filters{padding:12px 20px;border-bottom:1px solid var(--border);display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+    .fpt-filter-btn{background:var(--card2);border:1px solid var(--border);color:var(--text2);padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;}
+    .fpt-filter-btn:hover,.fpt-filter-btn.active{background:var(--red);border-color:var(--red);color:#fff;}
+    .fpt{width:100%;border-collapse:collapse;font-size:13px;}
+    .fpt th{text-align:left;padding:10px 14px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border);background:var(--bg2);cursor:pointer;user-select:none;}
+    .fpt th:hover{color:var(--white);}
+    .fpt td{padding:11px 14px;border-bottom:1px solid rgba(30,45,71,.4);color:var(--text);vertical-align:middle;}
+    .fpt tr:last-child td{border-bottom:none;}
+    .fpt tr:hover td{background:var(--card2);}
+    .fpt .cap-cell{max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text2);font-size:12px;}
+    .fpt .num-cell{font-weight:700;font-variant-numeric:tabular-nums;}
+    .fpt .views-cell{color:var(--gold);}
+    .fpt .likes-cell{color:var(--white);}
+    .fpt .rate-cell.good{color:var(--green);}
+    .fpt .rate-cell.bad{color:var(--red2);}
+    .type-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+    .type-reel{background:rgba(0,208,132,.15);color:var(--green);}
+    .type-image{background:rgba(77,159,255,.15);color:var(--blue2);}
+    .type-sidecar{background:rgba(245,166,35,.15);color:var(--gold);}
+    .pin-icon{color:var(--gold);font-size:12px;margin-left:4px;}
+    .theme-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;background:rgba(155,89,182,.15);color:#c39bd3;}
+    .theme-badge.edu{background:rgba(26,115,232,.15);color:var(--blue2);}
+    .theme-badge.quiz{background:rgba(224,32,32,.15);color:var(--red2);}
+    .theme-badge.product{background:rgba(245,166,35,.15);color:var(--gold);}
+    .theme-badge.event{background:rgba(0,208,132,.15);color:var(--green);}
+    .theme-badge.social{background:rgba(255,140,66,.15);color:#ff8c42;}
+
+    /* THEME PERFORMANCE */
+    .theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+    .theme-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
+    .theme-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+    .theme-icon{font-size:24px;}
+    .theme-name{font-size:15px;font-weight:800;color:var(--white);}
+    .theme-type{font-size:11px;color:var(--text2);}
+    .theme-stat-row{display:flex;justify-content:space-between;margin-bottom:6px;}
+    .theme-stat-label{font-size:12px;color:var(--text2);}
+    .theme-stat-val{font-size:12px;font-weight:700;color:var(--white);}
+    .theme-rec{font-size:12px;color:var(--text3);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);line-height:1.5;}
+
+    @media(max-width:1100px){.calendar-grid{grid-template-columns:repeat(4,1fr);}.stats-row{grid-template-columns:repeat(3,1fr);}.finding-grid{grid-template-columns:repeat(2,1fr);}.comp-grid{grid-template-columns:repeat(2,1fr);}.pa-top-grid{grid-template-columns:repeat(2,1fr);}.theme-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:768px){.calendar-grid{grid-template-columns:repeat(2,1fr);}.posts-grid{grid-template-columns:1fr;}.stats-row{grid-template-columns:repeat(2,1fr);}.two-col{grid-template-columns:1fr;}.finding-grid{grid-template-columns:1fr;}.pa-top-grid{grid-template-columns:1fr;}.theme-grid{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
@@ -204,7 +282,17 @@
   </div>
 </header>
 
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="switchTab('overview',this)">📊 Overview</button>
+    <button class="tab-btn" onclick="switchTab('posts',this)">📋 Posts Analysis</button>
+    <button class="tab-btn" onclick="switchTab('calendar',this)">📅 Content Calendar</button>
+    <button class="tab-btn" onclick="switchTab('copy',this)">✍️ Post Copy</button>
+  </div>
+</nav>
+
 <main>
+<div id="tab-overview" class="tab-pane active">
 
   <!-- MARKET TICKER -->
   <div class="ticker-wrap">
@@ -729,11 +817,285 @@ What are you trading right now? Drop your setup below 👇
   <div class="hashtag-set"><div class="hashtag-title">Set B — Gold / Instruments</div><div class="hashtag-wrap"><span class="hashtag">#IronFX</span><span class="hashtag">#EURUSD</span><span class="hashtag">#XAUUSD</span><span class="hashtag">#GoldTrading</span><span class="hashtag">#ForexSignals</span><span class="hashtag">#TechnicalAnalysis</span><span class="hashtag">#ForexStrategy</span><span class="hashtag">#TradingSetup</span><span class="hashtag">#PriceAction</span><span class="hashtag">#ForexTrader</span></div></div>
   <div class="hashtag-set"><div class="hashtag-title">Set C — Events & Calendar</div><div class="hashtag-wrap"><span class="hashtag">#IronFX</span><span class="hashtag">#EconomicCalendar</span><span class="hashtag">#NFP</span><span class="hashtag">#FOMC</span><span class="hashtag">#ForexNews</span><span class="hashtag">#MarketMovers</span><span class="hashtag">#HighImpact</span><span class="hashtag">#TradingAlerts</span><span class="hashtag">#ForexFundamentals</span><span class="hashtag">#MacroTrading</span></div></div>
 
+</div><!-- /tab-overview -->
+
+<!-- ===== POSTS ANALYSIS TAB ===== -->
+<div id="tab-posts" class="tab-pane">
+
+  <div class="section-title" style="margin-top:0;">📋 Full Posts Analysis — Apify Real Data</div>
+  <div class="section-sub">29 posts scraped · Dec 2025 – Feb 2026 · Sorted by performance</div>
+
+  <!-- KPI row -->
+  <div class="pa-top-grid">
+    <div class="pa-card gold">
+      <div class="pa-label">Top Reel Views</div>
+      <div class="pa-num">54,666</div>
+      <div class="pa-sub">Trading Psychology · Jan 30 · 125 likes</div>
+    </div>
+    <div class="pa-card green">
+      <div class="pa-label">Top Image Likes</div>
+      <div class="pa-num">4,376</div>
+      <div class="pa-sub">Christmas Greeting · Dec 25 · 30 comments</div>
+    </div>
+    <div class="pa-card red">
+      <div class="pa-label">Avg Like/View (Reels)</div>
+      <div class="pa-num">0.19%</div>
+      <div class="pa-sub">Industry benchmark: 1–3% · Huge gap to close</div>
+    </div>
+    <div class="pa-card blue">
+      <div class="pa-label">Most Comments</div>
+      <div class="pa-num">47</div>
+      <div class="pa-sub">iPhone Giveaway · Jan 9 · 4,052 likes</div>
+    </div>
+  </div>
+
+  <!-- TOP CONTENT by Likes bar chart -->
+  <div class="two-col" style="margin-bottom:40px;">
+    <div>
+      <div class="section-title" style="font-size:20px;">🏆 Top Posts by Likes</div>
+      <div class="section-sub">Images & Interactive content dominate</div>
+      <div class="bar-chart">
+        <div class="bar-row"><div class="bar-label">🎄 Christmas Greeting</div><div class="bar-track"><div class="bar-fill gold" style="width:100%">4,376</div></div><div class="bar-val">4,376</div></div>
+        <div class="bar-row"><div class="bar-label">🎁 iPhone Giveaway</div><div class="bar-track"><div class="bar-fill gold" style="width:93%">4,052</div></div><div class="bar-val">4,052</div></div>
+        <div class="bar-row"><div class="bar-label">🎿 Snowball Effect Quiz</div><div class="bar-track"><div class="bar-fill green" style="width:85%">3,725</div></div><div class="bar-val">3,725</div></div>
+        <div class="bar-row"><div class="bar-label">🎅 Santa Claus Rally</div><div class="bar-track"><div class="bar-fill green" style="width:77%">3,352</div></div><div class="bar-val">3,352</div></div>
+        <div class="bar-row"><div class="bar-label">💘 Love at First Breakout</div><div class="bar-track"><div class="bar-fill blue" style="width:63%">2,751</div></div><div class="bar-val">2,751</div></div>
+        <div class="bar-row"><div class="bar-label">💕 Valentine's Effect</div><div class="bar-track"><div class="bar-fill blue" style="width:54%">2,377</div></div><div class="bar-val">2,377</div></div>
+        <div class="bar-row"><div class="bar-label">🖥️ Platforms Post</div><div class="bar-track"><div class="bar-fill blue" style="width:37%">1,641</div></div><div class="bar-val">1,641</div></div>
+        <div class="bar-row"><div class="bar-label">📈 Trade Shares</div><div class="bar-track"><div class="bar-fill blue" style="width:31%">1,358</div></div><div class="bar-val">1,358</div></div>
+        <div class="bar-row"><div class="bar-label">🚨 24/7 Myth vs Truth</div><div class="bar-track"><div class="bar-fill blue" style="width:29%">1,251</div></div><div class="bar-val">1,251</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="section-title" style="font-size:20px;">🎬 Top Reels by Views</div>
+      <div class="section-sub">Reels reach 40–55K but engagement is broken</div>
+      <div class="bar-chart">
+        <div class="bar-row"><div class="bar-label">🧠 Trading Psychology</div><div class="bar-track"><div class="bar-fill gold" style="width:100%">54,666</div></div><div class="bar-val">54,666</div></div>
+        <div class="bar-row"><div class="bar-label">🏆 2025 Unwrapped</div><div class="bar-track"><div class="bar-fill gold" style="width:98%">53,351</div></div><div class="bar-val">53,351</div></div>
+        <div class="bar-row"><div class="bar-label">📅 Economic Calendar</div><div class="bar-track"><div class="bar-fill gold" style="width:98%">53,337</div></div><div class="bar-val">53,337</div></div>
+        <div class="bar-row"><div class="bar-label">🎁 Christmas Shopping</div><div class="bar-track"><div class="bar-fill green" style="width:70%">38,042</div></div><div class="bar-val">38,042</div></div>
+        <div class="bar-row"><div class="bar-label">✈️ Tourism True/False</div><div class="bar-track"><div class="bar-fill green" style="width:69%">37,664</div></div><div class="bar-val">37,664</div></div>
+        <div class="bar-row"><div class="bar-label">🕒 Daylight Savings</div><div class="bar-track"><div class="bar-fill blue" style="width:60%">32,969</div></div><div class="bar-val">32,969</div></div>
+        <div class="bar-row"><div class="bar-label">🎅 Holiday Markets</div><div class="bar-track"><div class="bar-fill blue" style="width:53%">29,044</div></div><div class="bar-val">29,044</div></div>
+        <div class="bar-row"><div class="bar-label">🍫 Cocoa Valentine's</div><div class="bar-track"><div class="bar-fill blue" style="width:9%">4,945</div></div><div class="bar-val">4,945</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENT THEME ANALYSIS -->
+  <div class="section-title" style="font-size:20px;">🎯 Content Theme Performance</div>
+  <div class="section-sub" style="margin-bottom:20px;">What actually drives engagement for IronFX</div>
+  <div class="theme-grid" style="margin-bottom:40px;">
+    <div class="theme-card">
+      <div class="theme-header"><div class="theme-icon">🧩</div><div><div class="theme-name">Interactive Quizzes</div><div class="theme-type">Images — High engagement</div></div></div>
+      <div class="theme-stat-row"><span class="theme-stat-label">Avg Likes</span><span class="theme-stat-val" style="color:var(--green)">3,238</span></div>
+      <div class="theme-stat-row"><span class="theme-stat-label">Avg Comments</span><span class="theme-stat-val" style="color:var(--gold)">26</span></div>
+      <div class="theme-stat-row"><span class="theme-stat-label">Examples</span><span class="theme-stat-val">Snowball, Breakout, xmas</span></div>
+      <div class="theme-rec">🔥 Best performing theme. More quizzes = more followers. Run 2x/week.</div>
+    </div>
+    <div class="theme-card">
+      <div class="theme-header"><div class="theme-icon">📖</div><div><div class="theme-name">Term of the Day</div><div class="theme-type">Images — High reach via hashtags</div></div></div>
+      <div class="theme-stat-row"><span class="theme-stat-label">Avg Likes</span><span class="theme-stat-val" style="color:var(--green)">2,864</span></div>
+      <div class="theme-stat-row"><span class="theme-stat-label">Avg Comments</span><span class="theme-stat-val" style="color:var(--gold)">1</span></div>
+      <div class="theme-stat-row"><span class="theme-stat-label">Examples</span><span class="theme-stat-val">Santa Rally, Valentine Effect</span></div>
+      <div class="theme-rec">✅ Strong passive likes. Add "comment your prediction" CTA to activate comments.</div>
+    </div>
+    <div class="theme-card">
+      <div class="theme-header"><div class="theme-icon">🎁</div><div><div class="theme-name">Giveaways / Social</div><div class="theme-type">Images — Peak engagement</div></div></div>
+      <div class="theme-stat-row"><span class="theme-stat-label">Avg Likes</span><span class="theme-stat-val" style="color:var(--green)">4,214</span></div>
+      <div class="theme-stat-row"><span class="theme-stat-label">Avg Comments</span><span class="theme-stat-val" style="color:var(--gold)">39</span></div>
+      <div class="theme-stat-row"><span class="theme-stat-label">Examples</span><span class="theme-stat-val">iPhone Winner, Christmas</span></div>
+      <div class="theme-rec">🚀 Highest engagement. Plan monthly giveaway — followers jump, comments flood.</div>
+    </div>
+    <div class="theme-card">
+      <div class="theme-header"><div class="theme-icon">🎬</div><div><div class="theme-name">True/False Trivia Reels</div><div class="theme-type">Videos — High reach, low engage</div></div></div>
+      <div class="theme-stat-row"><span class="theme-stat-label">Avg Views</span><span class="theme-stat-val" style="color:var(--gold)">37,924</span></div>
+      <div class="theme-stat-row"><span class="theme-stat-label">Avg Likes</span><span class="theme-stat-val" style="color:var(--text2)">75</span></div>
+      <div class="theme-stat-row"><span class="theme-stat-label">Like/View Rate</span><span class="theme-stat-val" style="color:var(--red2)">0.2%</span></div>
+      <div class="theme-rec">⚠️ Massive reach but dead on likes. Fix: add voiceover, end with "Follow for more".</div>
+    </div>
+    <div class="theme-card">
+      <div class="theme-header"><div class="theme-icon">🛍️</div><div><div class="theme-name">Product / Account Posts</div><div class="theme-type">Images — Below average</div></div></div>
+      <div class="theme-stat-row"><span class="theme-stat-label">Avg Likes</span><span class="theme-stat-val" style="color:var(--text2)">422</span></div>
+      <div class="theme-stat-row"><span class="theme-stat-label">Avg Comments</span><span class="theme-stat-val" style="color:var(--text3)">0</span></div>
+      <div class="theme-stat-row"><span class="theme-stat-label">Examples</span><span class="theme-stat-val">Raw ECN, Std Fixed, PMAM</span></div>
+      <div class="theme-rec">📉 Weak. Needs social proof: testimonials, "how traders use this", real PnL examples.</div>
+    </div>
+    <div class="theme-card">
+      <div class="theme-header"><div class="theme-icon">📰</div><div><div class="theme-name">News / Market Events</div><div class="theme-type">Sidecar/Image — Variable</div></div></div>
+      <div class="theme-stat-row"><span class="theme-stat-label">Avg Likes</span><span class="theme-stat-val" style="color:var(--text2)">18</span></div>
+      <div class="theme-stat-row"><span class="theme-stat-label">Avg Comments</span><span class="theme-stat-val" style="color:var(--text3)">0</span></div>
+      <div class="theme-stat-row"><span class="theme-stat-label">Examples</span><span class="theme-stat-val">Elon $700B, 5-step sidecar</span></div>
+      <div class="theme-rec">❌ Poorest performer. News needs LIVE data + strong opinion to generate engagement.</div>
+    </div>
+  </div>
+
+  <!-- FULL POSTS TABLE -->
+  <div class="section-title" style="font-size:20px;">📊 All Posts — Full Data Table</div>
+  <div class="section-sub" style="margin-bottom:16px;">Click column headers to sort · Filter by type</div>
+  <div class="fpt-wrap">
+    <div class="fpt-filters">
+      <span style="font-size:11px;color:var(--text3);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-right:4px;">Filter:</span>
+      <button class="fpt-filter-btn active" onclick="filterPosts('all',this)">All (29)</button>
+      <button class="fpt-filter-btn" onclick="filterPosts('reel',this)">🎬 Reels</button>
+      <button class="fpt-filter-btn" onclick="filterPosts('image',this)">🖼️ Images</button>
+      <button class="fpt-filter-btn" onclick="filterPosts('sidecar',this)">📑 Sidecars</button>
+      <button class="fpt-filter-btn" onclick="filterPosts('top',this)">🔥 Top 10</button>
+    </div>
+    <div style="overflow-x:auto;">
+    <table class="fpt" id="postsTable">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)">Date ↕</th>
+          <th onclick="sortTable(1)">Type</th>
+          <th>Theme</th>
+          <th>Caption</th>
+          <th onclick="sortTable(4)">Views ↕</th>
+          <th onclick="sortTable(5)">Likes ↕</th>
+          <th onclick="sortTable(6)">Comments ↕</th>
+          <th onclick="sortTable(7)">Eng Rate</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+      <tbody id="postsBody">
+        <tr data-type="image" data-likes="6"><td>Feb 20</td><td><span class="type-badge type-image">Image</span></td><td><span class="theme-badge product">Product</span></td><td class="cap-cell">Losses are part of the game — Myth vs Truth</td><td class="num-cell views-cell">—</td><td class="num-cell likes-cell">6</td><td class="num-cell">0</td><td class="rate-cell bad">—</td><td><a href="https://www.instagram.com/p/DU-cAChk9p-/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="reel" data-likes="141"><td>Feb 20</td><td><span class="type-badge type-reel">Reel</span></td><td><span class="theme-badge">Promo</span></td><td class="cap-cell">(No caption) — brand video</td><td class="num-cell views-cell">77</td><td class="num-cell likes-cell">10</td><td class="num-cell">1</td><td class="rate-cell bad">13.0%</td><td><a href="https://www.instagram.com/p/DU-b021jR86/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="reel" data-likes="141" data-pinned="1"><td>Feb 06 📌</td><td><span class="type-badge type-reel">Reel</span></td><td><span class="theme-badge event">Calendar</span></td><td class="cap-cell">Economic Calendar February 📅</td><td class="num-cell views-cell">53,337</td><td class="num-cell likes-cell">141</td><td class="num-cell">0</td><td class="rate-cell bad">0.26%</td><td><a href="https://www.instagram.com/p/DUaLRM2lNUe/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="image" data-likes="513"><td>Feb 04</td><td><span class="type-badge type-image">Image</span></td><td><span class="theme-badge edu">FAQ</span></td><td class="cap-cell">What is a Requote? — FAQ post</td><td class="num-cell views-cell">—</td><td class="num-cell likes-cell">513</td><td class="num-cell">0</td><td class="rate-cell bad">—</td><td><a href="https://www.instagram.com/p/DUVIcaaDV--/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="image" data-likes="2751"><td>Feb 16</td><td><span class="type-badge type-image">Image</span></td><td><span class="theme-badge product">Product</span></td><td class="cap-cell">Wide range of trading platforms 🖥️</td><td class="num-cell views-cell">—</td><td class="num-cell likes-cell">1,641</td><td class="num-cell">0</td><td class="rate-cell bad">—</td><td><a href="https://www.instagram.com/p/DU0FYIIFm0r/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="reel" data-likes="125"><td>Jan 30</td><td><span class="type-badge type-reel">Reel</span></td><td><span class="theme-badge edu">Psychology</span></td><td class="cap-cell">Trust your trading instincts 🧠 — Trading psychology</td><td class="num-cell views-cell">54,666</td><td class="num-cell likes-cell">125</td><td class="num-cell">0</td><td class="rate-cell bad">0.23%</td><td><a href="https://www.instagram.com/p/DUIXWIVCMxy/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="image" data-likes="2751"><td>Feb 10</td><td><span class="type-badge type-image">Image</span></td><td><span class="theme-badge quiz">Quiz</span></td><td class="cap-cell">Guess the letters: L_VE AT F_RST BR_AK_UT 💘</td><td class="num-cell views-cell">—</td><td class="num-cell likes-cell">2,751</td><td class="num-cell">8</td><td class="rate-cell good">High</td><td><a href="https://www.instagram.com/p/DUklNGsloJE/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="reel" data-likes="54"><td>Jan 28</td><td><span class="type-badge type-reel">Reel</span></td><td><span class="theme-badge edu">Trivia</span></td><td class="cap-cell">Did you know forex sessions shift with Daylight Savings? 🕒</td><td class="num-cell views-cell">32,969</td><td class="num-cell likes-cell">54</td><td class="num-cell">0</td><td class="rate-cell bad">0.16%</td><td><a href="https://www.instagram.com/p/DUDNzy9GI3L/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="image" data-likes="336"><td>Feb 02</td><td><span class="type-badge type-image">Image</span></td><td><span class="theme-badge product">Product</span></td><td class="cap-cell">Raw ECN Account — spreads from 0 pips</td><td class="num-cell views-cell">—</td><td class="num-cell likes-cell">336</td><td class="num-cell">0</td><td class="rate-cell bad">—</td><td><a href="https://www.instagram.com/p/DUQTbnBDwe9/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="image" data-likes="1251"><td>Jan 14</td><td><span class="type-badge type-image">Image</span></td><td><span class="theme-badge edu">Myth Bust</span></td><td class="cap-cell">Myth: You have to watch markets 24/7 — Truth inside</td><td class="num-cell views-cell">—</td><td class="num-cell likes-cell">1,251</td><td class="num-cell">0</td><td class="rate-cell bad">—</td><td><a href="https://www.instagram.com/p/DTfo-4BDbZn/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="image" data-likes="1358"><td>Jan 08</td><td><span class="type-badge type-image">Image</span></td><td><span class="theme-badge product">Product</span></td><td class="cap-cell">Trade Shares of Apple, Amazon, Meta 📈</td><td class="num-cell views-cell">—</td><td class="num-cell likes-cell">1,358</td><td class="num-cell">2</td><td class="rate-cell bad">—</td><td><a href="https://www.instagram.com/p/DTQFv1-ja7i/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="image" data-likes="354"><td>Jan 26</td><td><span class="type-badge type-image">Image</span></td><td><span class="theme-badge product">Product</span></td><td class="cap-cell">PMAM Platform — manage multiple accounts</td><td class="num-cell views-cell">—</td><td class="num-cell likes-cell">354</td><td class="num-cell">0</td><td class="rate-cell bad">—</td><td><a href="https://www.instagram.com/p/DT-EKAcjyEa/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="image" data-likes="437"><td>Jan 16</td><td><span class="type-badge type-image">Image</span></td><td><span class="theme-badge product">Product</span></td><td class="cap-cell">Standard Fixed Account — fixed spreads 1.2 pips</td><td class="num-cell views-cell">—</td><td class="num-cell likes-cell">437</td><td class="num-cell">0</td><td class="rate-cell bad">—</td><td><a href="https://www.instagram.com/p/DTkQJGSCbW8/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="image" data-likes="461"><td>Jan 15</td><td><span class="type-badge type-image">Image</span></td><td><span class="theme-badge edu">Education</span></td><td class="cap-cell">Types of Traders: Algorithmic Traders 🤖</td><td class="num-cell views-cell">—</td><td class="num-cell likes-cell">461</td><td class="num-cell">1</td><td class="rate-cell bad">—</td><td><a href="https://www.instagram.com/p/DThog7DDCkc/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="image" data-likes="4052"><td>Jan 09</td><td><span class="type-badge type-image">Image</span></td><td><span class="theme-badge social">Giveaway</span></td><td class="cap-cell">🎉 Winner Announcement — iPhone 17 Pro!</td><td class="num-cell views-cell">—</td><td class="num-cell likes-cell">4,052</td><td class="num-cell">47</td><td class="rate-cell good">Peak</td><td><a href="https://www.instagram.com/p/DTSRAfYFLJs/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="sidecar" data-likes="23"><td>Jan 12</td><td><span class="type-badge type-sidecar">Sidecar</span></td><td><span class="theme-badge">News</span></td><td class="cap-cell">Elon Musk hits $700B net worth 📈</td><td class="num-cell views-cell">—</td><td class="num-cell likes-cell">23</td><td class="num-cell">0</td><td class="rate-cell bad">—</td><td><a href="https://www.instagram.com/p/DTaPDBXjguC/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="reel" data-likes="49"><td>Jan 20</td><td><span class="type-badge type-reel">Reel</span></td><td><span class="theme-badge edu">Trivia</span></td><td class="cap-cell">Does tourism affect the forex market? True/False 🧠</td><td class="num-cell views-cell">37,664</td><td class="num-cell likes-cell">49</td><td class="num-cell">1</td><td class="rate-cell bad">0.13%</td><td><a href="https://www.instagram.com/p/DTumtmEFDGl/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="reel" data-likes="30"><td>Jan 07</td><td><span class="type-badge type-reel">Reel</span></td><td><span class="theme-badge edu">Trivia</span></td><td class="cap-cell">Did you know markets move before a big event? 📈</td><td class="num-cell views-cell">150</td><td class="num-cell likes-cell">30</td><td class="num-cell">4</td><td class="rate-cell good">20.0%</td><td><a href="https://www.instagram.com/p/DTM86_Pkp7z/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="image" data-likes="3725"><td>Dec 23</td><td><span class="type-badge type-image">Image</span></td><td><span class="theme-badge quiz">Quiz</span></td><td class="cap-cell">Can you guess this festive trading term? SN__B__L EFFECT ❄️</td><td class="num-cell views-cell">—</td><td class="num-cell likes-cell">3,725</td><td class="num-cell">44</td><td class="rate-cell good">Peak</td><td><a href="https://www.instagram.com/p/DSmTZlFiIPP/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="reel" data-likes="128"><td>Dec 22</td><td><span class="type-badge type-reel">Reel</span></td><td><span class="theme-badge social">Brand</span></td><td class="cap-cell">2025 was a great year for IronFX 🏆 — Year Recap</td><td class="num-cell views-cell">53,351</td><td class="num-cell likes-cell">128</td><td class="num-cell">19</td><td class="rate-cell bad">0.24%</td><td><a href="https://www.instagram.com/p/DSkYu2MDx5e/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="reel" data-likes="82"><td>Dec 24</td><td><span class="type-badge type-reel">Reel</span></td><td><span class="theme-badge edu">Trivia</span></td><td class="cap-cell">During the holidays, forex market takes short breaks 🎅</td><td class="num-cell views-cell">29,044</td><td class="num-cell likes-cell">82</td><td class="num-cell">9</td><td class="rate-cell bad">0.28%</td><td><a href="https://www.instagram.com/p/DSpCkn2CQBn/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="image" data-likes="2377"><td>Feb 12</td><td><span class="type-badge type-image">Image</span></td><td><span class="theme-badge edu">Term</span></td><td class="cap-cell">Valentine's Effect — term of the day 💝 market phenomenon</td><td class="num-cell views-cell">—</td><td class="num-cell likes-cell">2,377</td><td class="num-cell">0</td><td class="rate-cell bad">—</td><td><a href="https://www.instagram.com/p/DUpuzRmjYew/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="reel" data-likes="24"><td>Feb 13</td><td><span class="type-badge type-reel">Reel</span></td><td><span class="theme-badge event">Seasonal</span></td><td class="cap-cell">Valentine's Cocoa — sweeten your portfolio 🍫💖</td><td class="num-cell views-cell">4,945</td><td class="num-cell likes-cell">24</td><td class="num-cell">0</td><td class="rate-cell bad">0.49%</td><td><a href="https://www.instagram.com/p/DUsruc2ktNF/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="image" data-likes="4376"><td>Dec 25</td><td><span class="type-badge type-image">Image</span></td><td><span class="theme-badge social">Holiday</span></td><td class="cap-cell">Merry Christmas from IronFX! 🎄 Green candles to you</td><td class="num-cell views-cell">—</td><td class="num-cell likes-cell">4,376</td><td class="num-cell">30</td><td class="rate-cell good">Peak</td><td><a href="https://www.instagram.com/p/DSrZhDZj_Ua/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="image" data-likes="3352"><td>Dec 15</td><td><span class="type-badge type-image">Image</span></td><td><span class="theme-badge edu">Term</span></td><td class="cap-cell">Santa Claus Rally — Term of the Day 🎅📈</td><td class="num-cell views-cell">—</td><td class="num-cell likes-cell">3,352</td><td class="num-cell">2</td><td class="rate-cell bad">—</td><td><a href="https://www.instagram.com/p/DSRwIhDFeaE/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="reel" data-likes="123"><td>Dec 16</td><td><span class="type-badge type-reel">Reel</span></td><td><span class="theme-badge edu">Trivia</span></td><td class="cap-cell">Does Christmas shopping affect the forex market? 🎁</td><td class="num-cell views-cell">38,042</td><td class="num-cell likes-cell">123</td><td class="num-cell">8</td><td class="rate-cell bad">0.32%</td><td><a href="https://www.instagram.com/p/DSUMqw_Fdv-/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="reel" data-likes="26"><td>Jan 08</td><td><span class="type-badge type-reel">Reel</span></td><td><span class="theme-badge event">Calendar</span></td><td class="cap-cell">January Economic Calendar — key events this month 📅</td><td class="num-cell views-cell">138</td><td class="num-cell likes-cell">26</td><td class="num-cell">1</td><td class="rate-cell bad">18.8%</td><td><a href="https://www.instagram.com/p/DTPYfgUABsO/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="image" data-likes="451"><td>Jan 19</td><td><span class="type-badge type-image">Image</span></td><td><span class="theme-badge edu">Education</span></td><td class="cap-cell">Free trading eBooks — IronFX Academy 📚</td><td class="num-cell views-cell">—</td><td class="num-cell likes-cell">451</td><td class="num-cell">0</td><td class="rate-cell bad">—</td><td><a href="https://www.instagram.com/p/DTrtqA4jZ9D/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+        <tr data-type="sidecar" data-likes="12"><td>Jan 23</td><td><span class="type-badge type-sidecar">Sidecar</span></td><td><span class="theme-badge edu">Education</span></td><td class="cap-cell">5 Steps to Finding Your Trading Style — swipe left 👉</td><td class="num-cell views-cell">—</td><td class="num-cell likes-cell">12</td><td class="num-cell">0</td><td class="rate-cell bad">—</td><td><a href="https://www.instagram.com/p/DT2TxAojMq1/" target="_blank" style="color:var(--blue2);font-size:11px;">→ View</a></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- RECOMMENDATIONS -->
+  <div class="section-title" style="font-size:20px;margin-top:40px;">💡 Strategic Recommendations</div>
+  <div class="section-sub" style="margin-bottom:20px;">Based on real post performance data</div>
+  <div class="two-col">
+    <div>
+      <div class="insight-box">
+        <div class="box-icon">✅</div>
+        <div>
+          <div class="box-title">Do More Of This</div>
+          <div class="box-text">
+            <strong>Interactive quizzes</strong> (avg 3,238 likes, 26 comments) — run 2x/week<br>
+            <strong>Term of the Day</strong> (avg 2,864 likes) — add "comment your prediction"<br>
+            <strong>Giveaways</strong> (avg 4,214 likes, 39 comments) — monthly<br>
+            <strong>Holiday/seasonal content</strong> — peaks every time
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="alert-box">
+        <div class="box-icon">❌</div>
+        <div>
+          <div class="box-title">Stop or Fix This</div>
+          <div class="box-text">
+            <strong>Product posts with no social proof</strong> (avg 400 likes, 0 comments)<br>
+            <strong>Reels with no voiceover or CTA</strong> — 54K views, 17 likes is wasted reach<br>
+            <strong>Empty caption reels</strong> — 2 posts in Feb with 0 caption<br>
+            <strong>Sidecar news</strong> without opinion or data — avg 18 likes
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-posts -->
+
+<!-- ===== CALENDAR TAB ===== -->
+<div id="tab-calendar" class="tab-pane">
+  <div class="section-title" style="margin-top:0;">📅 Content Calendar — Week of Feb 23 – Mar 2</div>
+  <div class="section-sub">7-day finance-first schedule · Based on real market events</div>
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center;">
+    <div style="font-size:40px;margin-bottom:16px;">📅</div>
+    <div style="font-size:20px;font-weight:700;color:var(--white);margin-bottom:8px;">Full Content Calendar</div>
+    <div style="font-size:14px;color:var(--text2);margin-bottom:20px;">The complete weekly schedule is in the Overview tab → scroll down to "Content Calendar" section.</div>
+    <button class="copy-btn" onclick="switchTab('overview',document.querySelector('.tab-btn'))">← Back to Overview</button>
+  </div>
+</div><!-- /tab-calendar -->
+
+<!-- ===== COPY TAB ===== -->
+<div id="tab-copy" class="tab-pane">
+  <div class="section-title" style="margin-top:0;">✍️ Ready-to-Post Captions</div>
+  <div class="section-sub">All captions with real market data · Click to copy</div>
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center;">
+    <div style="font-size:40px;margin-bottom:16px;">✍️</div>
+    <div style="font-size:20px;font-weight:700;color:var(--white);margin-bottom:8px;">Post Copy is in the Overview Tab</div>
+    <div style="font-size:14px;color:var(--text2);margin-bottom:20px;">All 7 ready-to-publish captions with copy buttons are in the Overview tab → scroll to "This Week's Post Copy".</div>
+    <button class="copy-btn" onclick="switchTab('overview',document.querySelector('.tab-btn'))">← Back to Overview</button>
+  </div>
+</div><!-- /tab-copy -->
+
 </main>
 
 <footer>Built by <span>AI_Guro</span> · Real data: Apify Instagram Scraper + Google Finance (SerpAPI) · Feb 22, 2026</footer>
 
 <script>
+  function switchTab(tabId, btn) {
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tabId).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function filterPosts(type, btn) {
+    document.querySelectorAll('.fpt-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const rows = document.querySelectorAll('#postsBody tr');
+    rows.forEach(row => {
+      if (type === 'all') { row.style.display = ''; return; }
+      if (type === 'top') {
+        const likes = parseInt(row.dataset.likes || '0');
+        row.style.display = likes >= 1000 ? '' : 'none';
+        return;
+      }
+      row.style.display = row.dataset.type === type ? '' : 'none';
+    });
+  }
+
+  let sortDir = {};
+  function sortTable(col) {
+    const tbody = document.getElementById('postsBody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    const dir = (sortDir[col] = !(sortDir[col]));
+    rows.sort((a, b) => {
+      const av = a.cells[col].textContent.replace(/[^0-9.]/g,'') || '0';
+      const bv = b.cells[col].textContent.replace(/[^0-9.]/g,'') || '0';
+      const an = parseFloat(av), bn = parseFloat(bv);
+      if (!isNaN(an) && !isNaN(bn)) return dir ? bn - an : an - bn;
+      return dir ? a.cells[col].textContent.localeCompare(b.cells[col].textContent)
+                 : b.cells[col].textContent.localeCompare(a.cells[col].textContent);
+    });
+    rows.forEach(r => tbody.appendChild(r));
+  }
+
   function copyCaption(id,btn){
     const text=document.getElementById(id).innerText;
     navigator.clipboard.writeText(text).then(()=>{
