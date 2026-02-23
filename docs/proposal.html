@@ -416,6 +416,10 @@
       gap: 20px;
       z-index: 100;
     }
+    /* ── MOBILE HEADER BAR ── */
+    #mobile-header {
+      display: none;
+    }
     .nav-btn {
       width: 40px; height: 40px;
       border-radius: 50%;
@@ -512,78 +516,83 @@
 
     /* ── MOBILE ── */
     @media (max-width: 820px) {
-      /* Slides: top-aligned + scrollable instead of centered */
+
+      /* ── Replace floating fixed elements with a clean top bar ── */
+      #logo-fixed, #conf-tag { display: none; }
+      #mobile-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        height: 48px;
+        background: var(--bg2);
+        border-bottom: 1px solid var(--border);
+        padding: 0 20px;
+        z-index: 200;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      #mobile-header .mh-logo { display: flex; align-items: center; gap: 8px; color: var(--white); }
+      #mobile-header .mh-logo .dot-logo { width: 6px; height: 6px; background: var(--purple2); border-radius: 50%; }
+      #mobile-header .mh-conf { color: var(--text3); font-size: 10px; letter-spacing: 1.5px; }
+
+      /* ── Nav: full-width bar pinned at bottom ── */
+      #nav {
+        bottom: 0; left: 0; right: 0;
+        transform: none; width: 100%; height: 52px;
+        background: var(--bg2);
+        border-top: 1px solid var(--border);
+        padding: 6px 0; border-radius: 0; gap: 16px; z-index: 200;
+      }
+
+      /* ── Deck: lives between header and nav — zero overlap ── */
+      #deck { position: fixed; top: 48px; bottom: 52px; left: 0; right: 0; width: 100%; height: auto; }
+
+      /* ── Slides: fill deck, scroll internally ── */
       .slide {
-        justify-content: flex-start;
-        align-items: flex-start;
-        overflow-y: auto;
-        overflow-x: hidden;
-        padding: 72px 20px 90px;
+        position: absolute; inset: 0;
+        justify-content: flex-start; align-items: flex-start;
+        overflow-y: auto; overflow-x: hidden;
+        padding: 24px 20px 24px;
         -webkit-overflow-scrolling: touch;
       }
-      /* Remove max-height + inner scroll — let the slide handle it */
-      .slide-inner {
-        max-height: none;
-        overflow-y: visible;
-        width: 100%;
-      }
-      /* Typography tightening */
+      .slide-inner { max-height: none; overflow-y: visible; width: 100%; }
+
+      /* ── Typography ── */
       h1 { font-size: 30px; margin-bottom: 14px; }
       h2 { font-size: 26px; margin-bottom: 12px; }
       .body-text { font-size: 15px; }
       .slide-label { margin-bottom: 14px; }
       .line { margin-bottom: 20px; }
-      /* All card grids → single column */
-      .cards.col2,
-      .cards.col3,
-      .cards.col4 { grid-template-columns: 1fr; }
-      .cards { margin-top: 20px; gap: 10px; }
-      .card { padding: 16px 18px; }
-      .card-icon { font-size: 22px; margin-bottom: 8px; }
+
+      /* ── Cards → single column ── */
+      .cards.col2, .cards.col3, .cards.col4 { grid-template-columns: 1fr; }
+      .cards { margin-top: 16px; gap: 10px; }
+      .card { padding: 14px 16px; }
+      .card-icon { font-size: 20px; margin-bottom: 6px; }
       .card-title { font-size: 13px; }
       .card-desc { font-size: 12px; }
-      .card-num { margin-bottom: 6px; }
-      /* Timeline → single column on mobile */
-      .steps { grid-template-columns: 1fr 1fr; }
-      .step { padding: 0 10px; }
-      .step-title { font-size: 12px; }
-      .step-desc { font-size: 11px; }
-      /* Pricing */
-      .price-row { grid-template-columns: 1fr; gap: 14px; margin-top: 20px; }
-      .price-card { padding: 20px; }
-      .price-amount { font-size: 38px; }
-      .price-period { font-size: 12px; margin-bottom: 14px; }
+      .card-num { margin-bottom: 4px; }
+
+      /* ── Pricing ── */
+      .price-row { grid-template-columns: 1fr; gap: 12px; margin-top: 16px; }
+      .price-card { padding: 18px; }
+      .price-amount { font-size: 36px; }
+      .price-period { font-size: 12px; margin-bottom: 12px; }
       .price-list li { font-size: 12px; }
-      .addon-row { flex-direction: column; gap: 10px; align-items: flex-start; }
+      .addon-row { flex-direction: column; gap: 8px; align-items: flex-start; margin-top: 12px; }
       .addon-pills { gap: 8px; }
-      /* Scope */
-      .scope-list { margin-top: 16px; gap: 8px; }
-      .scope-item {
-        padding: 10px 14px;
-        font-size: 13px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-      }
-      /* CTA */
-      .cta-big { font-size: 16px; margin-bottom: 28px; }
-      .cta-buttons { flex-direction: column; align-items: stretch; gap: 10px; }
-      .btn { text-align: center; margin-left: 0; }
-      /* Cover meta */
+
+      /* ── Scope ── */
+      .scope-list { margin-top: 14px; gap: 8px; }
+      .scope-item { padding: 10px 14px; font-size: 13px; flex-direction: column; align-items: flex-start; gap: 5px; }
+
+      /* ── Cover meta ── */
       .cover-meta strong { font-size: 13px; }
-      /* Nav: full-width bar pinned at bottom — won't overlap text */
-      #nav {
-        bottom: 0;
-        left: 0;
-        right: 0;
-        transform: none;
-        width: 100%;
-        background: var(--bg2);
-        border-top: 1px solid var(--border);
-        padding: 10px 0;
-        border-radius: 0;
-        gap: 16px;
-      }
+      .cover-prepared { margin-top: 28px !important; gap: 24px !important; }
     }
   </style>
 </head>
@@ -592,6 +601,12 @@
 <div id="progress"></div>
 <div id="logo-fixed"><div class="dot-logo"></div>THAT AI GURU</div>
 <div id="conf-tag">Confidential · 2026</div>
+
+<!-- Mobile-only header bar (replaces floating fixed elements) -->
+<div id="mobile-header">
+  <div class="mh-logo"><div class="dot-logo"></div>That AI Guru</div>
+  <span class="mh-conf">Confidential · 2026</span>
+</div>
 
 <div id="deck">
 
