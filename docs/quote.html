@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IronFX — AI Social Media Proposal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:#080c14;--bg2:#0d1420;--bg3:#111926;--card:#131d2e;--card2:#1a2540;
+      --border:#1e2d47;--red:#e02020;--red2:#ff3333;--gold:#f5a623;--gold2:#ffc94d;
+      --green:#00d084;--green2:#00ff9d;--blue:#1a73e8;--blue2:#4d9fff;
+      --white:#ffffff;--text:#c8d6e8;--text2:#7a95b8;--text3:#4a6080;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;min-height:100vh;}
+
+    /* HEADER */
+    header{background:linear-gradient(135deg,#0d1420,#0a1628);border-bottom:2px solid var(--red);padding:0 40px;}
+    .header-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:72px;}
+    .logo-wrap{display:flex;align-items:center;gap:16px;}
+    .logo-badge{background:var(--red);color:#fff;padding:8px 16px;border-radius:4px;font-weight:800;font-size:16px;letter-spacing:1px;}
+    .logo-sub{font-size:11px;color:var(--text2);letter-spacing:2px;text-transform:uppercase;line-height:1.5;}
+    .logo-sub strong{color:var(--white);display:block;font-size:13px;}
+    .doc-badge{background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.4);color:var(--gold);padding:6px 16px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;}
+
+    /* HERO */
+    .hero{background:linear-gradient(135deg,#080c14 0%,#0d1828 50%,#080c14 100%);border-bottom:1px solid var(--border);padding:64px 40px;}
+    .hero-inner{max-width:960px;margin:0 auto;}
+    .hero-tag{display:inline-block;background:rgba(224,32,32,.15);border:1px solid rgba(224,32,32,.35);color:var(--red2);padding:4px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
+    .hero-title{font-family:'Bebas Neue',sans-serif;font-size:54px;letter-spacing:3px;line-height:1;margin-bottom:12px;}
+    .hero-title span{color:var(--red2);}
+    .hero-sub{font-size:16px;color:var(--text);max-width:580px;line-height:1.7;margin-bottom:32px;}
+    .hero-meta{display:flex;gap:32px;align-items:center;flex-wrap:wrap;}
+    .hero-meta-item{display:flex;flex-direction:column;gap:2px;}
+    .hero-meta-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:2px;font-weight:600;}
+    .hero-meta-val{font-size:14px;color:var(--text);font-weight:600;}
+    .hero-meta-val.gold{color:var(--gold);}
+    .hero-divider{width:1px;height:36px;background:var(--border);}
+
+    /* MAIN */
+    main{max-width:960px;margin:0 auto;padding:48px 40px 80px;}
+    .section{margin-bottom:48px;}
+    .section-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;color:var(--white);margin-bottom:4px;}
+    .section-sub{font-size:13px;color:var(--text2);margin-bottom:24px;}
+    .divider{height:1px;background:var(--border);margin:40px 0;}
+
+    /* WHAT YOU GET */
+    .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+    .feature-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;position:relative;overflow:hidden;transition:border-color .2s;}
+    .feature-card:hover{border-color:var(--red);}
+    .feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+    .feature-card.red::before{background:linear-gradient(90deg,var(--red),transparent);}
+    .feature-card.gold::before{background:linear-gradient(90deg,var(--gold),transparent);}
+    .feature-card.green::before{background:linear-gradient(90deg,var(--green),transparent);}
+    .feature-card.blue::before{background:linear-gradient(90deg,var(--blue2),transparent);}
+    .feature-card.purple::before{background:linear-gradient(90deg,#9b59b6,transparent);}
+    .feature-card.cyan::before{background:linear-gradient(90deg,#00bcd4,transparent);}
+    .feat-icon{font-size:30px;margin-bottom:12px;}
+    .feat-title{font-size:14px;font-weight:700;color:var(--white);margin-bottom:6px;}
+    .feat-desc{font-size:12px;color:var(--text2);line-height:1.6;}
+
+    /* PRICING */
+    .pricing-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;}
+    .price-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;position:relative;overflow:hidden;}
+    .price-card.featured{border-color:var(--gold);background:linear-gradient(135deg,#131d2e,#1a2030);}
+    .price-card.featured::after{content:'RECOMMENDED';position:absolute;top:16px;right:-28px;background:var(--gold);color:#000;font-size:9px;font-weight:800;letter-spacing:2px;padding:4px 40px;transform:rotate(45deg);transform-origin:center;}
+    .price-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text2);margin-bottom:12px;}
+    .price-amount{font-size:42px;font-weight:800;line-height:1;margin-bottom:4px;}
+    .price-amount .currency{font-size:22px;font-weight:600;vertical-align:top;margin-top:8px;display:inline-block;color:var(--text2);}
+    .price-card.featured .price-amount{color:var(--gold);}
+    .price-card:not(.featured) .price-amount{color:var(--white);}
+    .price-period{font-size:13px;color:var(--text3);margin-bottom:24px;}
+    .price-divider{height:1px;background:var(--border);margin:20px 0;}
+    .price-includes{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:12px;}
+    .price-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+    .price-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--text);}
+    .price-list li .check{color:var(--green);font-size:14px;flex-shrink:0;margin-top:1px;}
+    .price-list li .x{color:var(--red2);font-size:14px;flex-shrink:0;margin-top:1px;}
+
+    /* ADD-ON */
+    .addon-card{background:linear-gradient(135deg,rgba(26,115,232,.08),rgba(26,115,232,.03));border:1px solid rgba(26,115,232,.3);border-radius:12px;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+    .addon-left{flex:1;min-width:200px;}
+    .addon-title{font-size:15px;font-weight:700;color:var(--white);margin-bottom:4px;}
+    .addon-desc{font-size:13px;color:var(--text2);line-height:1.5;}
+    .addon-pricing{display:flex;gap:24px;flex-shrink:0;}
+    .addon-price-item{text-align:center;}
+    .addon-price-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-bottom:4px;}
+    .addon-price-val{font-size:22px;font-weight:800;color:var(--blue2);}
+    .addon-price-val small{font-size:12px;font-weight:400;color:var(--text3);}
+
+    /* SCOPE TABLE */
+    .scope-table-wrap{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+    .scope-table{width:100%;border-collapse:collapse;font-size:13px;}
+    .scope-table th{text-align:left;padding:12px 20px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border);background:var(--bg2);}
+    .scope-table td{padding:14px 20px;border-bottom:1px solid rgba(30,45,71,.5);color:var(--text);vertical-align:middle;}
+    .scope-table tr:last-child td{border-bottom:none;}
+    .scope-table tr:hover td{background:var(--card2);}
+    .scope-badge{display:inline-block;padding:3px 10px;border-radius:4px;font-size:10px;font-weight:700;text-transform:uppercase;}
+    .scope-badge.included{background:rgba(0,208,132,.15);color:var(--green);}
+    .scope-badge.limited{background:rgba(245,166,35,.15);color:var(--gold);}
+    .scope-badge.addon{background:rgba(26,115,232,.15);color:var(--blue2);}
+
+    /* TIMELINE */
+    .timeline{position:relative;padding-left:32px;}
+    .timeline::before{content:'';position:absolute;left:10px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--red),var(--gold),var(--green));}
+    .tl-item{position:relative;margin-bottom:28px;}
+    .tl-dot{position:absolute;left:-28px;top:4px;width:14px;height:14px;border-radius:50%;border:2px solid var(--bg);z-index:1;}
+    .tl-item:nth-child(1) .tl-dot{background:var(--red2);}
+    .tl-item:nth-child(2) .tl-dot{background:var(--gold);}
+    .tl-item:nth-child(3) .tl-dot{background:var(--blue2);}
+    .tl-item:nth-child(4) .tl-dot{background:var(--green);}
+    .tl-item:nth-child(5) .tl-dot{background:#9b59b6;}
+    .tl-week{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+    .tl-title{font-size:14px;font-weight:700;color:var(--white);margin-bottom:4px;}
+    .tl-desc{font-size:12px;color:var(--text2);line-height:1.5;}
+
+    /* TOTAL SUMMARY */
+    .summary-box{background:linear-gradient(135deg,rgba(224,32,32,.1),rgba(245,166,35,.06));border:1px solid rgba(245,166,35,.35);border-radius:16px;padding:36px 40px;margin-bottom:24px;}
+    .summary-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--gold);margin-bottom:20px;}
+    .summary-rows{display:flex;flex-direction:column;gap:12px;}
+    .summary-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(30,45,71,.6);}
+    .summary-row:last-child{border-bottom:none;padding-top:20px;margin-top:8px;}
+    .summary-row.total{border-top:2px solid var(--gold);}
+    .summary-row-label{font-size:13px;color:var(--text);}
+    .summary-row-val{font-size:15px;font-weight:700;color:var(--white);}
+    .summary-row.total .summary-row-label{font-size:15px;font-weight:700;color:var(--gold);}
+    .summary-row.total .summary-row-val{font-size:28px;font-weight:800;color:var(--gold);}
+
+    /* TERMS */
+    .terms-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+    .term-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;}
+    .term-title{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2);margin-bottom:6px;}
+    .term-text{font-size:13px;color:var(--text);line-height:1.5;}
+
+    /* CTA */
+    .cta-box{background:linear-gradient(135deg,#0d1420,#10182a);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center;margin-top:48px;}
+    .cta-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;margin-bottom:8px;}
+    .cta-sub{font-size:14px;color:var(--text2);margin-bottom:28px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.6;}
+    .cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+    .btn-primary{background:var(--red);color:#fff;padding:14px 36px;border-radius:8px;font-size:14px;font-weight:700;letter-spacing:1px;text-decoration:none;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s;}
+    .btn-primary:hover{background:var(--red2);}
+    .btn-secondary{background:transparent;color:var(--text);padding:14px 36px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;text-transform:uppercase;border:1px solid var(--border);cursor:pointer;transition:border-color .2s;}
+    .btn-secondary:hover{border-color:var(--text2);}
+
+    /* FOOTER */
+    footer{background:var(--bg2);border-top:1px solid var(--border);padding:24px 40px;text-align:center;}
+    .footer-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+    .footer-left{font-size:12px;color:var(--text3);}
+    .footer-right{font-size:12px;color:var(--text3);}
+    .footer-right strong{color:var(--text2);}
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .features-grid{grid-template-columns:1fr 1fr;}
+      .pricing-wrap{grid-template-columns:1fr;}
+      .terms-grid{grid-template-columns:1fr;}
+      .hero-title{font-size:36px;}
+      main{padding:32px 20px 60px;}
+      header{padding:0 20px;}
+      .hero{padding:40px 20px;}
+      .summary-box{padding:24px 20px;}
+    }
+    @media(max-width:480px){
+      .features-grid{grid-template-columns:1fr;}
+      .addon-card{flex-direction:column;}
+      .addon-pricing{width:100%;justify-content:space-around;}
+    }
+
+    /* PRINT */
+    @media print{
+      body{background:#fff;color:#000;}
+      header,footer{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <div class="logo-badge">IronFX</div>
+      <div class="logo-sub">
+        <strong>AI Social Media System</strong>
+        Service Proposal &amp; Pricing
+      </div>
+    </div>
+    <div class="doc-badge">Confidential Quote</div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Proposal · 2026</div>
+    <div class="hero-title">AUTOMATED AI<br><span>SOCIAL MEDIA</span><br>MANAGEMENT</div>
+    <div class="hero-sub">
+      A fully autonomous AI agent system that generates, schedules, and publishes brand-aligned financial content across your social media accounts — daily, on autopilot.
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Prepared For</span>
+        <span class="hero-meta-val">IronFX Global Ltd.</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Date</span>
+        <span class="hero-meta-val">February 2026</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Base Package</span>
+        <span class="hero-meta-val gold">30 Accounts · 1 Post/Day</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Setup Investment</span>
+        <span class="hero-meta-val gold">€10,000 one-time</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- WHAT YOU GET -->
+  <div class="section">
+    <div class="section-title">What's Included</div>
+    <div class="section-sub">Everything needed to run autonomous AI-powered social media at scale</div>
+    <div class="features-grid">
+      <div class="feature-card red">
+        <div class="feat-icon">🤖</div>
+        <div class="feat-title">Dedicated AI Agent</div>
+        <div class="feat-desc">A custom-trained AI agent that knows your brand voice, compliance rules, and target audience. Operates 24/7 without human intervention.</div>
+      </div>
+      <div class="feature-card gold">
+        <div class="feat-icon">📊</div>
+        <div class="feat-title">Live Market Data Integration</div>
+        <div class="feat-desc">Real-time forex, commodities, and indices data auto-injected into every post. Gold prices, EUR/USD, NFP alerts — all live and accurate.</div>
+      </div>
+      <div class="feature-card green">
+        <div class="feat-icon">🎨</div>
+        <div class="feat-title">AI-Generated Visuals</div>
+        <div class="feat-desc">Professional financial ad images generated by Gemini AI for every post — on-brand, dark-themed, IronFX style. No designer needed.</div>
+      </div>
+      <div class="feature-card blue">
+        <div class="feat-icon">📅</div>
+        <div class="feat-title">Smart Content Calendar</div>
+        <div class="feat-desc">Automated weekly content planning aligned with economic events: FOMC, NFP, Core PCE, GDP releases. Never miss a market moment.</div>
+      </div>
+      <div class="feature-card purple">
+        <div class="feat-icon">🚀</div>
+        <div class="feat-title">Multi-Platform Publishing</div>
+        <div class="feat-desc">Auto-publish to Instagram, Facebook, X (Twitter), LinkedIn — all via API. Each account gets tailored copy for each platform.</div>
+      </div>
+      <div class="feature-card cyan">
+        <div class="feat-icon">📈</div>
+        <div class="feat-title">Performance Dashboard</div>
+        <div class="feat-desc">Live web dashboard showing engagement metrics, top posts, content calendar, and AI-generated post previews — updated in real time.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PRICING -->
+  <div class="section">
+    <div class="section-title">Pricing</div>
+    <div class="section-sub">Transparent, fixed pricing — no hidden fees</div>
+    <div class="pricing-wrap">
+
+      <!-- SETUP -->
+      <div class="price-card">
+        <div class="price-label">One-Time Setup Fee</div>
+        <div class="price-amount"><span class="currency">€</span>10,000</div>
+        <div class="price-period">Paid upon contract signing</div>
+        <div class="price-divider"></div>
+        <div class="price-includes">Setup includes</div>
+        <ul class="price-list">
+          <li><span class="check">✓</span>Agent architecture &amp; custom training</li>
+          <li><span class="check">✓</span>Brand voice &amp; compliance configuration</li>
+          <li><span class="check">✓</span>Live market data API integration</li>
+          <li><span class="check">✓</span>Instagram, Facebook, X, LinkedIn connection</li>
+          <li><span class="check">✓</span>Performance dashboard deployment</li>
+          <li><span class="check">✓</span>30-account onboarding &amp; QA testing</li>
+          <li><span class="check">✓</span>2-week supervised launch period</li>
+          <li><span class="x">✗</span>Ongoing maintenance (covered by retainer)</li>
+        </ul>
+      </div>
+
+      <!-- MONTHLY RETAINER -->
+      <div class="price-card featured">
+        <div class="price-label">Monthly Retainer</div>
+        <div class="price-amount"><span class="currency">€</span>1,200</div>
+        <div class="price-period">Per month · billed monthly · cancel with 30 days notice</div>
+        <div class="price-divider"></div>
+        <div class="price-includes">Monthly retainer includes</div>
+        <ul class="price-list">
+          <li><span class="check">✓</span>Up to <strong>30 social accounts</strong> managed</li>
+          <li><span class="check">✓</span><strong>1 AI-generated post per account per day</strong></li>
+          <li><span class="check">✓</span>Up to 30 AI visuals generated per day</li>
+          <li><span class="check">✓</span>Live market data refresh (daily)</li>
+          <li><span class="check">✓</span>Economic event alerts &amp; reactive posts</li>
+          <li><span class="check">✓</span>Dashboard access &amp; weekly reports</li>
+          <li><span class="check">✓</span>Platform API maintenance &amp; uptime</li>
+          <li><span class="check">✓</span>Priority support (48h response SLA)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ADD-ON -->
+    <div class="addon-card">
+      <div class="addon-left">
+        <div class="addon-title">➕ Additional Accounts (Add-On)</div>
+        <div class="addon-desc">Need more than 30 accounts? Expand your reach at any time. Each additional social account adds capacity for 1 post per day with full AI generation.</div>
+      </div>
+      <div class="addon-pricing">
+        <div class="addon-price-item">
+          <div class="addon-price-label">Setup</div>
+          <div class="addon-price-val">€200 <small>/ account</small></div>
+        </div>
+        <div class="addon-price-item">
+          <div class="addon-price-label">Monthly</div>
+          <div class="addon-price-val">€50 <small>/ account</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SCOPE OF WORK -->
+  <div class="section">
+    <div class="section-title">Scope of Work</div>
+    <div class="section-sub">What the AI agent does — and what remains yours to control</div>
+    <div class="scope-table-wrap">
+      <table class="scope-table">
+        <thead>
+          <tr>
+            <th>Deliverable</th>
+            <th>Frequency</th>
+            <th>Accounts</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>AI-generated post copy (caption + hashtags)</td>
+            <td>Daily</td>
+            <td>All 30</td>
+            <td><span class="scope-badge included">Included</span></td>
+          </tr>
+          <tr>
+            <td>AI-generated post visual (1024×1024 image)</td>
+            <td>Daily</td>
+            <td>All 30</td>
+            <td><span class="scope-badge included">Included</span></td>
+          </tr>
+          <tr>
+            <td>Live forex/commodity data injection</td>
+            <td>Daily</td>
+            <td>All 30</td>
+            <td><span class="scope-badge included">Included</span></td>
+          </tr>
+          <tr>
+            <td>Scheduled auto-publish via API</td>
+            <td>Daily</td>
+            <td>All 30</td>
+            <td><span class="scope-badge included">Included</span></td>
+          </tr>
+          <tr>
+            <td>Economic event reactive posts (NFP, FOMC, etc.)</td>
+            <td>Per event</td>
+            <td>All 30</td>
+            <td><span class="scope-badge included">Included</span></td>
+          </tr>
+          <tr>
+            <td>Performance dashboard (live)</td>
+            <td>Continuous</td>
+            <td>Shared</td>
+            <td><span class="scope-badge included">Included</span></td>
+          </tr>
+          <tr>
+            <td>Weekly analytics report</td>
+            <td>Weekly</td>
+            <td>Shared</td>
+            <td><span class="scope-badge included">Included</span></td>
+          </tr>
+          <tr>
+            <td>AI video / Reel generation</td>
+            <td>On request</td>
+            <td>Selected</td>
+            <td><span class="scope-badge limited">Available Add-On</span></td>
+          </tr>
+          <tr>
+            <td>Accounts beyond 30</td>
+            <td>Daily</td>
+            <td>Per account</td>
+            <td><span class="scope-badge addon">€200 setup + €50/mo</span></td>
+          </tr>
+          <tr>
+            <td>Manual content editing / overrides</td>
+            <td>On request</td>
+            <td>Any</td>
+            <td><span class="scope-badge limited">Client-controlled</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- IMPLEMENTATION TIMELINE -->
+  <div class="section">
+    <div class="section-title">Implementation Timeline</div>
+    <div class="section-sub">From contract signing to fully autonomous operation</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-week">Week 1</div>
+        <div class="tl-title">Kickoff &amp; Configuration</div>
+        <div class="tl-desc">Brand voice setup, API credentials collection, social platform authentication, content strategy alignment with IronFX marketing team.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-week">Week 2</div>
+        <div class="tl-title">Agent Build &amp; Data Integration</div>
+        <div class="tl-desc">AI agent training with IronFX brand guidelines, live market data API integration, visual generation pipeline setup and tested.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-week">Week 3</div>
+        <div class="tl-title">Account Onboarding &amp; QA</div>
+        <div class="tl-desc">All 30 accounts connected and verified. Sample content generated for approval. Publishing pipeline tested end-to-end across all platforms.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-week">Week 4</div>
+        <div class="tl-title">Supervised Launch</div>
+        <div class="tl-desc">First 7 days of live publishing with human review. Dashboard goes live. First weekly performance report delivered to IronFX.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-week">Month 2+</div>
+        <div class="tl-title">Fully Autonomous Operation</div>
+        <div class="tl-desc">100% automated daily publishing. Monthly retainer kicks in. Ongoing optimization based on engagement data and market performance.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PRICING SUMMARY -->
+  <div class="section">
+    <div class="section-title">Investment Summary</div>
+    <div class="section-sub">Full cost breakdown for the base package</div>
+    <div class="summary-box">
+      <div class="summary-title">BASE PACKAGE — 30 ACCOUNTS</div>
+      <div class="summary-rows">
+        <div class="summary-row">
+          <span class="summary-row-label">One-time setup fee (agent build, onboarding, integration)</span>
+          <span class="summary-row-val">€10,000</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-row-label">Monthly retainer — 30 accounts × 1 post/day (Month 1)</span>
+          <span class="summary-row-val">€1,200</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-row-label">Total investment — Year 1 (setup + 12 months)</span>
+          <span class="summary-row-val">€24,400</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-row-label">Effective cost per post (30 posts/day × 365 days)</span>
+          <span class="summary-row-val">€0.22 / post</span>
+        </div>
+        <div class="summary-row total">
+          <span class="summary-row-label">Monthly retainer from Month 2 onwards</span>
+          <span class="summary-row-val">€1,200 / month</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADDON EXAMPLE -->
+    <div class="scope-table-wrap">
+      <table class="scope-table">
+        <thead>
+          <tr>
+            <th>Scenario</th>
+            <th>Accounts</th>
+            <th>Setup</th>
+            <th>Monthly</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Base Package</strong></td>
+            <td>30</td>
+            <td>€10,000</td>
+            <td><strong style="color:var(--gold)">€1,200</strong></td>
+          </tr>
+          <tr>
+            <td>Base + 10 extra accounts</td>
+            <td>40</td>
+            <td>€12,000</td>
+            <td>€1,700</td>
+          </tr>
+          <tr>
+            <td>Base + 20 extra accounts</td>
+            <td>50</td>
+            <td>€14,000</td>
+            <td>€2,200</td>
+          </tr>
+          <tr>
+            <td>Base + 70 extra accounts</td>
+            <td>100</td>
+            <td>€24,000</td>
+            <td>€4,700</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TERMS -->
+  <div class="section">
+    <div class="section-title">Terms &amp; Conditions</div>
+    <div class="section-sub">Key commercial terms</div>
+    <div class="terms-grid">
+      <div class="term-item">
+        <div class="term-title">Contract Term</div>
+        <div class="term-text">Minimum 3-month initial commitment. Month-to-month thereafter with 30 days written notice to cancel.</div>
+      </div>
+      <div class="term-item">
+        <div class="term-title">Payment Terms</div>
+        <div class="term-text">Setup fee due 50% on signing, 50% on go-live. Monthly retainer billed on the 1st of each month.</div>
+      </div>
+      <div class="term-item">
+        <div class="term-title">Account Limit</div>
+        <div class="term-text">Base package covers up to 30 social media accounts. Each additional account is billed at €200 setup + €50/month.</div>
+      </div>
+      <div class="term-item">
+        <div class="term-title">Content Rights</div>
+        <div class="term-text">All AI-generated content is owned by IronFX upon delivery. No licensing fees or usage restrictions after payment.</div>
+      </div>
+      <div class="term-item">
+        <div class="term-title">Uptime SLA</div>
+        <div class="term-text">99.5% publishing uptime guaranteed. Missed posts due to platform API downtime are credited at pro-rata rate.</div>
+      </div>
+      <div class="term-item">
+        <div class="term-title">Quote Validity</div>
+        <div class="term-text">This proposal is valid for 30 days from the date of issue. Pricing subject to change after expiry.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <div class="cta-title">READY TO AUTOMATE YOUR SOCIAL MEDIA?</div>
+    <div class="cta-sub">Let's get your AI agent live within 4 weeks. 30 accounts. Daily posts. Zero manual work.</div>
+    <div class="cta-buttons">
+      <a href="mailto:info@ironfx.com" class="btn-primary">Accept &amp; Move Forward</a>
+      <a href="#" class="btn-secondary">Request a Call</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">AI Social Media System · Confidential Proposal · February 2026</div>
+    <div class="footer-right">Prepared for <strong>IronFX Global Ltd.</strong> · Valid 30 days</div>
+  </div>
+</footer>
+
+</body>
+</html>
