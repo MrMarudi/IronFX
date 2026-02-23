@@ -499,6 +499,7 @@
       z-index: 100;
     }
 
+    /* ── TABLET ── */
     @media (max-width: 768px) {
       .slide { padding: 40px 28px; }
       .cards.col4 { grid-template-columns: 1fr 1fr; }
@@ -507,6 +508,71 @@
       .step:nth-child(2)::after { display: none; }
       .price-row { grid-template-columns: 1fr; }
       #dots { display: none; }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      /* Slides: top-aligned + scrollable instead of centered */
+      .slide {
+        justify-content: flex-start;
+        align-items: flex-start;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 72px 20px 90px;
+        -webkit-overflow-scrolling: touch;
+      }
+      /* Remove max-height + inner scroll — let the slide handle it */
+      .slide-inner {
+        max-height: none;
+        overflow-y: visible;
+        width: 100%;
+      }
+      /* Typography tightening */
+      h1 { font-size: 30px; margin-bottom: 14px; }
+      h2 { font-size: 26px; margin-bottom: 12px; }
+      .body-text { font-size: 15px; }
+      .slide-label { margin-bottom: 14px; }
+      .line { margin-bottom: 20px; }
+      /* All card grids → single column */
+      .cards.col2,
+      .cards.col3,
+      .cards.col4 { grid-template-columns: 1fr; }
+      .cards { margin-top: 20px; gap: 10px; }
+      .card { padding: 16px 18px; }
+      .card-icon { font-size: 22px; margin-bottom: 8px; }
+      .card-title { font-size: 13px; }
+      .card-desc { font-size: 12px; }
+      .card-num { margin-bottom: 6px; }
+      /* Timeline → single column on mobile */
+      .steps { grid-template-columns: 1fr 1fr; }
+      .step { padding: 0 10px; }
+      .step-title { font-size: 12px; }
+      .step-desc { font-size: 11px; }
+      /* Pricing */
+      .price-row { grid-template-columns: 1fr; gap: 14px; margin-top: 20px; }
+      .price-card { padding: 20px; }
+      .price-amount { font-size: 38px; }
+      .price-period { font-size: 12px; margin-bottom: 14px; }
+      .price-list li { font-size: 12px; }
+      .addon-row { flex-direction: column; gap: 10px; align-items: flex-start; }
+      .addon-pills { gap: 8px; }
+      /* Scope */
+      .scope-list { margin-top: 16px; gap: 8px; }
+      .scope-item {
+        padding: 10px 14px;
+        font-size: 13px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      /* CTA */
+      .cta-big { font-size: 16px; margin-bottom: 28px; }
+      .cta-buttons { flex-direction: column; align-items: stretch; gap: 10px; }
+      .btn { text-align: center; margin-left: 0; }
+      /* Cover meta */
+      .cover-meta strong { font-size: 13px; }
+      /* Nav stays fixed at bottom */
+      #nav { bottom: 20px; }
     }
   </style>
 </head>
@@ -747,6 +813,7 @@
     dotsEl.children[cur].classList.remove('active');
     cur = Math.max(0, Math.min(n, total-1));
     slides[cur].classList.add('active');
+    slides[cur].scrollTop = 0; // always start from top on mobile
     dotsEl.children[cur].classList.add('active');
     document.getElementById('slide-counter').textContent = (cur+1) + ' / ' + total;
     document.getElementById('btn-prev').disabled = cur === 0;
@@ -762,13 +829,17 @@
     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') go(-1);
   });
 
-  // touch swipe
-  let tx = 0;
-  document.addEventListener('touchstart', e => tx = e.touches[0].clientX);
+  // touch swipe — only horizontal swipes navigate; vertical scroll works normally
+  let tx = 0, ty = 0;
+  document.addEventListener('touchstart', e => {
+    tx = e.touches[0].clientX;
+    ty = e.touches[0].clientY;
+  }, { passive: true });
   document.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - tx;
-    if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
-  });
+    const dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 60) go(dx < 0 ? 1 : -1);
+  }, { passive: true });
 
   // init progress
   document.getElementById('progress').style.width = (1/total*100) + '%';
